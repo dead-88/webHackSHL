@@ -18,7 +18,6 @@
 import os
 import argparse
 from modules import adminder
-#from modules import sqlitestmod
 from modules import sqlimod
 from modules import portsmod
 from modules import fingerwebmod
@@ -98,7 +97,7 @@ try:
         sel=raw_input("Selecciona: ")
         if sel == "a":
             try:
-                from modules import sqlitest
+                os.system("python2 sqlitest.py")                
                 webframework()
             except KeyboardInterrupt:
                 webframework()

@@ -16,7 +16,7 @@
 import subprocess
 import os
 isnm=os.path.isfile("/usr/bin/nmap")
-isfierce=os.path.isfile("/usr/bin/fierce")
+isfierce=os.path.isfile("/usr/bin/fierce") or os.path.isfile("/usr/bin/fierce.pl")
 ismap=os.path.isfile("/usr/bin/sqlmap")
 isenum=os.path.isfile("/usr/bin/dnsenum")
 isnikto=os.path.isfile("/usr/bin/nikto")
