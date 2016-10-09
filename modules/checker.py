@@ -15,6 +15,7 @@
 
 import subprocess
 import os
+isrb=os.path.isfile("/usr/bin/ruby")
 isnm=os.path.isfile("/usr/bin/nmap")
 isfierce=os.path.isfile("/usr/bin/fierce") or os.path.isfile("/usr/bin/fierce.pl")
 ismap=os.path.isfile("/usr/bin/sqlmap")
@@ -34,11 +35,14 @@ def installall():
         print "Añadiendo el repositorio temporal de Kali a tu lista de repossitorios ..."
         os.system("sudo echo -e '\ndeb http://http.kali.org/kali kali-rolling main contrib non-free' | sudo tee -a /etc/apt/sources.list.d/kalitemp.list")
         print ""
+        print "Importando las claves de GNU/Kali Linux para ejecutar la instalacion..."
+        os.system("sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com ED444FF07D8D0BF6")
+        print ""
         print "Actualizando tu lista de paquetes ..."
         os.system("sudo apt update")
         os.system("clear")
         print "Instalando los paquetes ..."
-        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan")
+        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby")
         print ""
         print "Removiendo el repositorio temporal de Kali Linux ..."
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")

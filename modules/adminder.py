@@ -15,5 +15,4 @@
 
 import subprocess
 def adminfind():
-    subprocess.call(["chmod","+x","./adminder/buscaelpanel.py"])
-    subprocess.call(["./adminder/buscaelpanel.py"])
+    subprocess.call(["python2","modules/buscaelpanel.py"])
