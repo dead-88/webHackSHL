@@ -97,7 +97,7 @@ try:
         sel=raw_input("Selecciona: ")
         if sel == "a":
             try:
-                os.system("python2 sqlitest.py")                
+                os.system("python2 modules/sqlitest.py")    
                 webframework()
             except KeyboardInterrupt:
                 webframework()
