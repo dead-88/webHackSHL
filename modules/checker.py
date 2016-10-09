@@ -57,7 +57,7 @@ def installall():
         installall()
 
 def check():
-    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp:
+    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb:
         print "Todo lo necesario esta instalado, procediendo."
     else:
         installall()

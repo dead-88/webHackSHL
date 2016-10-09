@@ -80,9 +80,9 @@ try:
     print ""
     disclaimer()
     print ""
-    gems()
-    print ""
     checker.check()
+    print ""
+    gems()
     def webframework():
         print ""
         print """Selecciona una de las siguientes opciones.
