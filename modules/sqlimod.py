@@ -115,11 +115,11 @@ def postcolumns():
 
 def isdba():
     print "Comprobando si el usuario actual es root de MySQL ..."
-    outp = open("sqlopt/output.txt", "w")
+    outp = open("modules/sqlopt/output.txt", "w")
     subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--is-dba"],stdout=outp)
-    if 'current user is DBA:    False' in open('sqlopt/output.txt').read():
+    if 'current user is DBA:    False' in open('modules/sqlopt/output.txt').read():
         print "El usuario no es root."
-    elif 'current user is DBA:    True' in open('sqlopt/output.txt').read():
+    elif 'current user is DBA:    True' in open('modules/sqlopt/output.txt').read():
         print "El usuario es root!, esto es fascinante!!."
     else:
         print "Resultado inesperado."
