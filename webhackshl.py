@@ -65,6 +65,7 @@ def logo():
 
     Programador: Eduard Eliecer Tolosa Toloza 
       XMPP/Email: tolosaeduard@cock.lu
+      IRC: irc.mozilla.org #shl
     Security Hack Labs Team. @SecurityHackLab
     Blog: https://securityhacklabs.blogspot.com
 
