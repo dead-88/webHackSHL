@@ -88,7 +88,7 @@ try:
         print ""
         print """Selecciona una de las siguientes opciones.
         a) Buscar URLs vulnerables a SQLi, LFI, RCE, XSS.
-        b) Realizar SQLi a una web vulnerable a SQLi
+        b) Realizar SQLi a una web vulnerable a SQLi.
         c) Realizar un escaneo completo de un host, enumerar DNS, Bypassear Cloudflare y mas.
 	d) Realizar pruebas de penetracion web y analisis de vulnerabilidades.
         e) Buscar el panel admin de un sitio web.
