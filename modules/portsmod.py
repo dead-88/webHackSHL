@@ -15,58 +15,50 @@
 
 import subprocess
 def host():
-    global host
-    host=raw_input("Introduce el host al que deseas hacerle el scan: ")
-    if host == "":
+    global target
+    target=raw_input("Introduce el host al que deseas hacerle el scan: ")
+    if target == "":
         print "Host invalido."
-        menu()
+        host()
     else:
-        return host
+        return target
 def port():
-    global port
-    port=raw_input("Introduce el puerto o los puertos que deseas escanear (Si deseas un rango de puertos, escribelos de la manera 1-1000): ")
-    if port == "":
+    global portnumber
+    portnumber=raw_input("Introduce el puerto o los puertos que deseas escanear (Si deseas un rango de puertos, escribelos de la manera 1-1000): ")
+    if portnumber == "":
         print "Puerto invalido."
-        menu()
+        port()
     else:
-        return port
+        return portnumber
 def intensescan():
     host()
     print "Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root."
-    subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",host])
-    menu()
+    subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target])
 def fastscan():
     host()
-    subprocess.call(["nmap","-F",host])
-    menu()
+    subprocess.call(["nmap","-F",target])
 def detectserv():
     host()
-    subprocess.call(["nmap","-sP",host])
-    menu()
+    subprocess.call(["nmap","-sP",target])
 def detectver():
     host()
-    subprocess.call(["nmap","-sV",host])
-    menu()
+    subprocess.call(["nmap","-sV",target])
 def escanport():
     host()
     port()
-    subprocess.call(["nmap","-p",port,host])
-    menu()
+    subprocess.call(["nmap","-p",portnumber,target])
 def recsystem():
     host()
     print "Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root."
-    subprocess.call(["sudo","nmap","-O",host])
-    menu()
+    subprocess.call(["sudo","nmap","-O",target])
 def enumdns():
     host()
     print "Enumerando DNS's"
-    subprocess.call(["dnsenum",host])
-    menu()
+    subprocess.call(["dnsenum",target])
 def bypasscloud():
     host()
     print "Intentando Bypassear Cloudflare usando fierce..."
-    subprocess.call(["fierce","-dns",host])
-    menu()
+    subprocess.call(["fierce","-dns",target])
 def menu():
     print """Por favor selecciona una de las siguientes opciones
     a) Escaneo full de un host (Lento pero el mas completo).
@@ -82,20 +74,28 @@ def menu():
     sel=raw_input("Introduce tu opcion: ")
     if sel == "a":
         intensescan()
+        menu()
     elif sel == "b":
         fastscan()
+        menu()
     elif sel == "c":
         detectserv()
+        menu()
     elif sel == "d":
         detectver()
+        menu()
     elif sel == "e":
         escanport()
+        menu()
     elif sel == "f":
         recsystem()
+        menu()
     elif sel == "g":
         enumdns()
+        menu()
     elif sel == "h":
         bypasscloud()
+        menu()
     elif sel == "i":
         print "Saliendo."
     else:

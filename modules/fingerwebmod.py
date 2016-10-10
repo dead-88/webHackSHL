@@ -17,38 +17,38 @@ import subprocess
 import portsmod
 
 def whatw():
-    host=portsmod.host()
+    web=portsmod.host()
     print "Obteniendo informacion del sitio web."
     print ""
-    subprocess.call(["whatweb","-v",host])
+    subprocess.call(["whatweb","-v",web])
     execute()
 def nickscan():
-    host=portsmod.host()
+    web=portsmod.host()
     print "Buscando vulnerabilidades en el sitio web usando nikto..."
-    subprocess.call(["nikto","-no404","-host",host])
+    subprocess.call(["nikto","-no404","-host",web])
     execute()
 def joomsc():
-    host=host=portsmod.host()
+    web=portsmod.host()
     print "Buscando vulnerabilidades en el sitio web usando joomlavs..."
     subprocess.call(["chmod","+x","joomlavs"])
-    subprocess.call(["./joomlavs","-u",host,"-a"])
+    subprocess.call(["./joomlavs","-u",web,"-a"])
     execute()
 def joomsctor():
-    host=host=portsmod.host()
+    web=host=portsmod.host()
     print "Buscando vulnerabilidades en el sitio web usando joomlavs usando TOR..."
     subprocess.call(["chmod","+x","joomlavs"])
-    subprocess.call(["./joomlavs","-u",host,"--proxy","SOCKS5://127.0.0.1:9050","-a"])
+    subprocess.call(["./joomlavs","-u",web,"--proxy","SOCKS5://127.0.0.1:9050","-a"])
     execute()
 
 def wordpresscan():
-    host=host=portsmod.host()
+    web=portsmod.host()
     print "Buscando vulnerabilidades en el sitio web usando wpscan..."
-    subprocess.call(["sudo","wpscan","-u",host,"--enumerate","p","--enumerate","t","--enumerate","u"])
+    subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u"])
     execute()
 def wordpresscantor():
-    host=host=portsmod.host()
+    web=portsmod.host()
     print "Buscando vulnerabilidades en el sitio web usando wpscan..."
-    subprocess.call(["sudo","wpscan","-u",host,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050"])
+    subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050"])
     execute()
 
 def execute():
