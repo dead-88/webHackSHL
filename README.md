@@ -11,5 +11,7 @@ Actualizar la herramienta: python2 webhackshl.py -u
 
 #Soporte y contacto.
 
+irc.mozilla.org canal #shl
+
 XMPP/Email: securityhacklabs@cock.lu
             tolosaeduard@cock.li
