@@ -44,7 +44,7 @@ def installall():
         os.system("sudo apt update")
         os.system("clear")
         print "Instalando los paquetes ..."
-        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git")
+        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl")
         print ""
         print "Removiendo el repositorio temporal de Kali Linux ..."
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
