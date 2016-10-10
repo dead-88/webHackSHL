@@ -25,8 +25,7 @@ def menu():
     option=raw_input("Introduce tu opcion: ")
     try:
         if option == "a":
-            os.system("chmod +x ./modules/hashidentifier")
-            subprocess.call("./modules/hashidentifier")
+            os.system("python2 modules/hashidentifier")
             menu()
         elif option == "b":
             print """Utiliza las siguientes direcciones Web para buscar tus hash.
@@ -34,9 +33,11 @@ def menu():
             2) Para hash Sha-1 - https://hashkiller.co.uk/sha1-decrypter.aspx
             3) Para claves WPA/WPA2 - https://hashkiller.co.uk/wpa-crack.aspx
             4) Para hash NTML https://hashkiller.co.uk/ntlm-decrypter.aspx
-            
-            Adicionalmente puedes descargar tus wordlist para ataques de fuerza bruta directamente desde aquí: http://bit.ly/2djKmuf
             """
+            print "Adicionalmente puedes descargar tus wordlist para ataques de fuerza bruta directamente desde aquí: "
+            os.system("cat modules/wordlist/worlists.txt | curl -F 'sprunge=<-' http://sprunge.us")
+            print ""
+            
             menu()
         elif option == "c":
             print "Saliendo."

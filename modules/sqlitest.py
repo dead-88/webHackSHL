@@ -315,9 +315,9 @@ def ClassicXSS(url):
       pass
  
 def injtest():
-  print B+"\n[+] Preparing for SQLi scanning ..."
-  print "[+] Can take a while ..."
-  print "[!] Working ...\n"
+  print B+"\n[+] Preparando para escaneo SQLi ..."
+  print "[+] Puede tomar un tiempo ..."
+  print "[!] Trabajando  ...\n"
   i = len(usearch) / int(numthreads)
   m = len(usearch) % int(numthreads)
   z = 0
@@ -334,9 +334,9 @@ def injtest():
       thread.join()
       
 def lfitest():
-  print B+"\n[+] Preparing for LFI - RCE scanning ..."
-  print "[+] Can take a while ..."
-  print "[!] Working ...\n"
+  print B+"\n[+] Preparando para escaneo LFI - RCE ..."
+  print "[+] Puede tomar un tiempo ..."
+  print "[!] Trabajando  ...\n"
   i = len(usearch) / int(numthreads)
   m = len(usearch) % int(numthreads)
   z = 0
@@ -353,9 +353,9 @@ def lfitest():
       thread.join()
  
 def xsstest():
-  print B+"\n[+] Preparing for XSS scanning ..."
-  print "[+] Can take a while ..."
-  print "[!] Working ...\n"
+  print B+"\n[+] Preparando para escaneo XSS ..."
+  print "[+] Puede tomar un tiempo ..."
+  print "[!] Trabajando  ...\n"
   i = len(usearch) / int(numthreads)
   m = len(usearch) % int(numthreads)
   z = 0
@@ -370,7 +370,60 @@ def xsstest():
       threads.append(thread)
     for thread in threads:
       thread.join()
- 
+def sitek():
+    global sitekey
+    sitekey = raw_input("\nIntroduce tu objetivo, (Si tu no conoces introduce el 1) :  ")
+    if sitekey == "":
+        print "Introduce un objetivo valido (1-5), el objetivo no puede estar vacio."
+        sitek()
+    elif sitekey not in {'1', '2', '3', '4', '5'}:
+        print "Introduce un objetivo valido (1-5)"
+        sitek()
+    else:
+        return sitekey
+
+def sitedom():
+    global sitedomain
+    sitedomain=raw_input("\nIntroduce un dominio especifico (Ejemplo: com, net, org ...) si quieres buscar en multiples dominios, separalos con comas : ")
+    if sitedomain == "":
+        print "El dominio no puede estar vacio."
+        sitedom()
+    else:
+        return sitedomain
+
+def dorkk():
+    global inurl
+    inurl=raw_input("\nIntroduce tu dork ( Un dork es similar a php?id= ), si deseas ver una URL con ejemplos de dorks, escriba 'urldorks' si quieres obtener la lista de dorks en una URL: ")
+    if inurl == "":
+        print "El dork no puede estar vacio."
+        dorkk()
+    elif inurl == "urldorks" or inurl == "'urldorks'":
+        print "\nSubiendo los dorks al paste, por favor abra la URL resultante despues de esto."
+        os.system("cat modules/vulns/dorks.txt | curl -F 'sprunge=<-' http://sprunge.us")
+        dorkk()
+    else:
+        return inurl
+
+def thrreads():
+    global numthreads
+    numthreads=raw_input("\nIntroduce el numero de threads (1-10), sino conoces introduce 10 : ")
+    if numthreads == "":
+        print "El numero de threads no puede estar vacio."
+        thrreads()
+    elif numthreads not in {'1', '2', '3', '4', '5', '6', '7', '8', '9', '10'}:
+        print "El numero de threads en invalido."
+        thrreads()
+    else:
+        return numthreads
+
+def pagess():
+    global maxc
+    maxc=raw_input("\nIntroduce el numero de paginas en las que deseas buscar, entre mas paginas, mas resultados: ")
+    if maxc == "":
+        print "El numero de paginas no puede estar vacio."
+        pagess()
+    else:
+        return maxc
 menu = True
 new = 1
 while menu == True:
@@ -385,10 +438,9 @@ while menu == True:
     for k,v in domains.items():
       stecnt += 1
       print str(stecnt)+" - "+k
-    sitekey = raw_input("\nChoose your target  (if you don't know choose default) :  ")
-
+    sitek()
     if sitekey == "5":
-      sitedomain = raw_input("\nChoose the specifics domain (e.g. fr or com...) for multiples domains separe with commas :  ")
+      sitedom()
       if "," in sitedomain:
         site = sitedomain.split(',')
         sitearray = site
@@ -399,9 +451,9 @@ while menu == True:
       sitearray = domains[domains.keys()[int(sitekey)-1]]
     
  
-    inurl = raw_input('\nEnter your dork      : ')
-    numthreads = raw_input('Enter no. of threads : ')
-    maxc = raw_input('Enter no. of pages   : ')
+    dorkk()
+    thrreads()
+    pagess()
     print "\nNumber of SQL errors :",len(sqlerrors)
     print "Number of LFI paths  :",len(lfis)
     print "Number of XSS cheats :",len(xsses)
@@ -434,10 +486,9 @@ while menu == True:
     
   if chce == '2':
     injtest()
-    print B+"\n[+] Preparing for Column Finder ..."
-    print "[+] Can take a while ..."
-    print "[!] Working ..."
-    # Thanks rsauron for schemafuzz
+    print B+"\n[+] Preparando para escaneo  Column Finder ..."
+    print "[+] Puede tomar un tiempo ..."
+    print "[!] Trabajando  ..."
     for host in col:
       print R+"\n[+] Target: ", O+host
       print R+"[+] Attempting to find the number of columns ..."
@@ -450,7 +501,7 @@ while menu == True:
 	try:
 	  sys.stdout.write("%s," % (x))
 	  sys.stdout.flush()
-	  sechacklabs = "dark"+str(x)+"c0de"
+	  sechacklabs = "sec"+str(x)+"hacklabs"
 	  checkfor.append(sechacklabs)
 	  if x > 0:
 	    sitenew += ","

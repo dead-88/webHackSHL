@@ -23,6 +23,8 @@ isenum=os.path.isfile("/usr/bin/dnsenum")
 isnikto=os.path.isfile("/usr/bin/nikto")
 iswhatw=os.path.isfile("/usr/bin/whatweb")
 iswp=os.path.isfile("/usr/bin/wpscan")
+iscurl=os.path.isfile("/usr/bin/curl")
+isgit=os.path.isfile("/usr/bin/git")
 
 def installall():
     print """Para que este framework funcione correctamente, necesitas tener instaladas las siguientes herramientas:
@@ -42,7 +44,7 @@ def installall():
         os.system("sudo apt update")
         os.system("clear")
         print "Instalando los paquetes ..."
-        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby")
+        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git")
         print ""
         print "Removiendo el repositorio temporal de Kali Linux ..."
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
@@ -57,7 +59,7 @@ def installall():
         installall()
 
 def check():
-    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb:
+    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb and isgit and iscurl:
         print "Todo lo necesario esta instalado, procediendo."
     else:
         installall()
