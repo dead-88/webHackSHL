@@ -10,8 +10,11 @@ Actualizar la herramienta: python2 webhackshl.py -u
 
 # Como Descargar de GitHub Nuestra Herramienta.
 Abran la Terminal:
+
 ~$ sudo apt install git
-luego 
+
+luego
+
 ~$ git clone https://github.com/SecHackLabs/WebHackSHL.git
 
 #Soporte y contacto.
