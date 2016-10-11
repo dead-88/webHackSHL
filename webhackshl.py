@@ -42,25 +42,6 @@ if args.utools:
     checker.updatetools()
     os._exit(0)
 
-def gems():
-    print "Revisando si Bundler esta instalado..."
-    gem=os.system("bundle | grep 'Bundle complete! 5 Gemfile dependencies, 15 gems now installed.'")
-    if gem == 0:
-        print "Bundler esta instalado. Continuando."
-        pass
-    else:
-        print """Necesitas instalar Bundler, procediendo a la instalación.
-Bundler es requerido por un escanner de vulnerabilidades, necesitas privilegios root o sudo para instalarlo.
-Esto puede tomar un tiempo."""     
-        inst = raw_input("Deseas continuar con la instalación? y/n : ")
-        if inst=="y":
-            print "Instalando bundler..."
-            os.system("sudo gem install bundler && bundle install")
-            pass
-        elif inst=="n":
-            print "Instalacion cancelada, esto traera problemas en la opcion d) del menú usando joomlavs. Continuando ..."
-            pass
-
 def logo():
     print """
  __    __     _                      _     __          __  
@@ -76,8 +57,9 @@ def logo():
     Blog: https://securityhacklabs.blogspot.com
 
 
-Uso: python webhackshl.py -h - Muestra un mensaje de ayuda.
-     python webhackshl.py -u - Actualiza WebHackSHL a la versión mas reciente.
+Uso: python2 webhackshl.py -h - Muestra un mensaje de ayuda.
+     python2 webhackshl.py -u - Actualiza WebHackSHL a la versión mas reciente.
+     python2 webhachshl.py -ut - Actualiza las Herramientas necesarias para WebHackSHL
 """
 
 def disclaimer():
@@ -89,7 +71,7 @@ try:
     print ""
     checker.check()
     print ""
-    gems()
+    checker.gems()
     def webframework():
         print ""
         checker.cAmarillo("""Selecciona una de las siguientes opciones.""")

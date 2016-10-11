@@ -93,6 +93,25 @@ def installall():
 
 def check():
     if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb and isgit and iscurl:
-        print "Todo lo necesario esta instalado, procediendo."
+        cVerde("Todo lo necesario esta instalado, procediendo.")
     else:
         installall()
+
+def gems():
+    cVerde("check Bundle...")
+    gem=os.system("bundle | grep -q 'Bundle complete! 5 Gemfile dependencies, 15 gems now installed.'")
+    if gem == 0:
+        cVerde("Bundler - 0K")
+        pass
+    else:
+        print """Necesitas instalar Bundler, procediendo a la instalación.
+Bundler es requerido por un escanner de vulnerabilidades, necesitas privilegios root o sudo para instalarlo.
+Esto puede tomar un tiempo."""     
+        inst = raw_input("Deseas continuar con la instalación? y/n : ")
+        if inst=="y":
+            cAmarillo("Instalando bundler...")
+            os.system("sudo gem install bundler && bundle install")
+            pass
+        elif inst=="n":
+            cRojo("Instalacion cancelada, esto traera problemas en la opcion d) del menú usando joomlavs. Continuando...")
+            pass
