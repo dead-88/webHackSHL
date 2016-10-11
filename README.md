@@ -19,7 +19,7 @@ luego
 
 #Soporte y contacto.
 
-IRC: Server: irc.stormbit.net | Canal #SHL | Puerto: 6697 (SSL)
+IRC: Server: irc.stormbit.net | Canal: #SHL | Puerto: 6697 (SSL)
 
 XMPP/Email: securityhacklabs@cock.lu
             tolosaeduard@cock.li
