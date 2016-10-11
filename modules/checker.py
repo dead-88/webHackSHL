@@ -15,6 +15,7 @@
 
 import subprocess
 import os
+istor=os.path.isfile("/usr/bin/tor")
 isrb=os.path.isfile("/usr/bin/ruby")
 isnm=os.path.isfile("/usr/bin/nmap")
 isfierce=os.path.isfile("/usr/bin/fierce") or os.path.isfile("/usr/bin/fierce.pl")
@@ -46,7 +47,7 @@ def updatetools():
         cAmarillo("Actualizando tu lista de paquetes ...")
         os.system("sudo apt update")
         cAmarillo("actualizando Herramientas del sistema...")
-        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl")
+        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor")
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
@@ -77,7 +78,7 @@ def installall():
         os.system("sudo apt update")
         os.system("clear")
         cAmarillo("Instalando los paquetes ...")
-        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl")
+        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor")
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
@@ -92,10 +93,27 @@ def installall():
         installall()
 
 def check():
-    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb and isgit and iscurl:
+    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb and isgit and iscurl and istor:
         cVerde("Todo lo necesario esta instalado, procediendo.")
     else:
         installall()
+
+def dtor():
+    cVerde("check tor...")
+    tor=os.system("systemctl status tor | grep -qw active")
+    if tor == 0:
+        cVerde("0K - TOR")
+        pass
+    else:
+        cRojo("Necesitar iniciar TOR")
+        resp = raw_input("¿Deseas Ininiciarlo ahora? y/n : ")
+        if resp=="y":
+            cAmarillo("iniciando TOR...")
+            os.system("sudo tor &")
+            pass
+        elif resp=="n":
+            cRojo("algunas Opciones no trabajaran bien")
+            pass
 
 def gems():
     cVerde("check Bundle...")
@@ -107,7 +125,7 @@ def gems():
         print """Necesitas instalar Bundler, procediendo a la instalación.
 Bundler es requerido por un escanner de vulnerabilidades, necesitas privilegios root o sudo para instalarlo.
 Esto puede tomar un tiempo."""     
-        inst = raw_input("Deseas continuar con la instalación? y/n : ")
+        inst = raw_input("¿Deseas continuar con la instalación? y/n : ")
         if inst=="y":
             cAmarillo("Instalando bundler...")
             os.system("sudo gem install bundler && bundle install")
