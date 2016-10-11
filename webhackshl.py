@@ -43,7 +43,7 @@ if args.utools:
     os._exit(0)
 
 def gems():
-    print "Revisando si Bundler esta instalado ..."
+    print "Revisando si Bundler esta instalado..."
     gem=os.system("bundle | grep 'Bundle complete! 5 Gemfile dependencies, 15 gems now installed.'")
     if gem == 0:
         print "Bundler esta instalado. Continuando."

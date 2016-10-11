@@ -23,3 +23,4 @@ irc.mozilla.org canal #shl
 
 XMPP/Email: securityhacklabs@cock.lu
             tolosaeduard@cock.li
+            PentSec@cock.li
