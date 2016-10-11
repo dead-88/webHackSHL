@@ -26,6 +26,7 @@ from modules import hashid
 
 parser = argparse.ArgumentParser(prog='webhackshl.py',usage='python2 webhackshl.py',description='WebHackSHL es un conjunto de herramientas desarrollado por Security Hack Labs, para realizar auditorias de seguridad web desde basicas hasta avanzadas, diseñado especialmente para sistemas Debian o basados en el, como Kali Linux. WebHackSHL aún esta en estado BETA, cualquier problema reportelo a nuestas cuentas de Email y/o Twitter.')
 parser.add_argument("-u", "--update", help="Actualiza WebHackSHL a la mas version mas reciente.", action="store_true")
+parser.add_argument("-ut", "--utools", help="Actualiza todas las herramientas Necesitadas por WebHackSHL en tu SO.", action="store_true")
 args = parser.parse_args()
 
 # Aquí procesamos lo que se tiene que hacer con cada argumento
@@ -35,6 +36,11 @@ if args.update:
        print "WebHackSHL actualizado correctamente."
        os._exit(0)
 
+# Aqui procesamos el update a la herramientas del sistema.
+if args.utools:
+    checker.cRojo("Iniciando la actualizacion de las Herramientas de tu sistema...")
+    checker.updatetools()
+    os._exit(0)
 
 def gems():
     print "Revisando si Bundler esta instalado ..."
