@@ -15,44 +15,46 @@
 
 import subprocess
 import portsmod
+import checker
 
 def whatw():
     web=portsmod.host()
-    print "Obteniendo informacion del sitio web."
+    checker.cAmarillo("Obteniendo informacion del sitio web.")
     print ""
     subprocess.call(["whatweb","-v",web])
     execute()
 def nickscan():
     web=portsmod.host()
-    print "Buscando vulnerabilidades en el sitio web usando nikto..."
+    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando nikto...")
     subprocess.call(["nikto","-no404","-host",web])
     execute()
 def joomsc():
     web=portsmod.host()
-    print "Buscando vulnerabilidades en el sitio web usando joomlavs..."
+    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando joomlavs...")
     subprocess.call(["chmod","+x","joomlavs"])
     subprocess.call(["./joomlavs","-u",web,"-a"])
     execute()
 def joomsctor():
     web=host=portsmod.host()
-    print "Buscando vulnerabilidades en el sitio web usando joomlavs usando TOR..."
+    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando joomlavs usando TOR...")
     subprocess.call(["chmod","+x","joomlavs"])
     subprocess.call(["./joomlavs","-u",web,"--proxy","SOCKS5://127.0.0.1:9050","-a"])
     execute()
 
 def wordpresscan():
     web=portsmod.host()
-    print "Buscando vulnerabilidades en el sitio web usando wpscan..."
+    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando wpscan...")
     subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u"])
     execute()
 def wordpresscantor():
     web=portsmod.host()
-    print "Buscando vulnerabilidades en el sitio web usando wpscan..."
+    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando wpscan...")
     subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050"])
     execute()
 
 def execute():
-    print """Elige una de las siguientes opciones:
+    checker.cAmarillo("Seleccina una de las siguientes opciones:")
+    print """
     a) Obtener informacion del sistio web, servidor, Ip, CMS, Software del servidor y mas.
     b) Buscar vulnerabilidades web usando nikto.
     c) Buscar vulnerabilidades web de sitios web Joomla.
