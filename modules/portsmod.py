@@ -14,7 +14,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
-from modules import checker
+import checker
+
 def host():
     global target
     target=raw_input("Introduce el host al que deseas hacerle el scan: ")
@@ -61,7 +62,8 @@ def bypasscloud():
     checker.cAmarillo("Intentando Bypassear Cloudflare usando fierce...")
     subprocess.call(["fierce","-dns",target])
 def menu():
-    print """Por favor selecciona una de las siguientes opciones
+    checker.cAmarillo("Por favor selecciona una de las siguientes opciones")
+    print """
     a) Escaneo full de un host (Lento pero el mas completo).
     b) Escaneo rapido de un host.
     c) Detectar servidores corriendo de un host.
