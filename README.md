@@ -4,7 +4,7 @@ WebHackSHL es un conjunto de herramientas desarrollado por Security Hack Labs, p
 
 Uso:
 
-General: python2 webhackshl.py
+~$ python2 webhackshl.py
 
 Actualizar la herramienta: python2 webhackshl.py -u
 
