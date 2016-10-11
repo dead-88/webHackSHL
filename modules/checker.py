@@ -119,16 +119,16 @@ def dtor():
             dtor()
 
 def gems():
-    cVerde("check Bundle...")
+    cVerde("check Bundler...")
     gem=os.system("bundle | grep -q 'Bundle complete! 5 Gemfile dependencies, 15 gems now installed.'")
     if gem == 0:
-        cVerde("Bundler - 0K")
+        cVerde("0K - Bundler")
         pass
     else:
         def gemsinstall():
-            print """Necesitas instalar Bundler, procediendo a la instalación.
+            cRojo("""Necesitas instalar Bundler, procediendo a la instalación.
     Bundler es requerido por un escanner de vulnerabilidades, necesitas privilegios root o sudo para instalarlo.
-    Esto puede tomar un tiempo."""     
+    Esto puede tomar un tiempo.""")
             inst = raw_input("Deseas continuar con la instalación? y/n : ")
             if inst=="y":
                 cAmarillo("Instalando bundler...")
