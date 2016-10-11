@@ -99,7 +99,7 @@ def check():
         installall()
 
 def dtor():
-    cVerde("check tor...")
+    cVerde("Verificando que el servicio TOR esté activo...")
     tor=os.system("systemctl status tor | grep -qw active")
     if tor == 0:
         cVerde("0K - TOR")
@@ -110,7 +110,7 @@ def dtor():
         if resp=="y":
             cAmarillo("Iniciando TOR...")
             os.system("sudo systemctl start tor")
-            pass
+            dtor()
         elif resp=="n":
             cRojo("Algunas opciones no funcionaran.")
             pass
