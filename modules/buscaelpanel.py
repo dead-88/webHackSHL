@@ -19,6 +19,7 @@ import os
 import httplib
 import socket
 import sys
+import checker
 
 try:
     print "\t#####################################################"
@@ -157,226 +158,224 @@ try:
 'adm/index.brf','adm.brf','affiliate.brf','adm_auth.brf','memberadmin.brf','administratorlogin.brf']
     
     try:
-        site = raw_input("Enter domain to scan: ")
+        site = raw_input("Escribe el Nombre del Dominio: ")
         site = site.replace("http://","")
-        print ("\tChecking website " + site + "...")
+        checker.cAmarillo("\tChecking website " + site + "...")
         conn = httplib.HTTPConnection(site)
         conn.connect()
-        print "\t[$] Yes... Server is Online."
+        checker.cVerde("\t[$] SI... El servidor esta online.")
     except (httplib.HTTPResponse, socket.error) as Exit:
         raw_input("\t [!] Oops Error occured, Server may be offline or invalid URL")
         exit()
-    print "Enter site source code:"
+    print "Introduce el codigo del sitio.:"
     print "1 PHP, 2 ASP, 3 CFM, 4 JS, 5 CGI, 6 BRF"
     print "\nPress 1 and 'Enter' to Select PHP, 2 for ASP etc...\n"
     code=input("> ")
         
     if code==1:
-        print("\t [+] Scanning " + site + "...\n\n")
+        checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in php:
             admin = admin.replace("\n","")
             admin = "/" + admin
             host = site + admin
-            print ("\t [#] Checking " + host + "...")
+            checker.cAmarillo("\t [#] Verificando " + host + "...")
             connection = httplib.HTTPConnection(site)
             connection.request("GET",admin)
             response = connection.getresponse()
             var2 = var2 + 1
             if response.status == 200:
                 var1 = var1 + 1
-                print "%s %s" % ( "\n\n>>>" + host, "Admin login found!")
-                decide=raw_input("Continue scanning? y/n :")
+                print "%s %s" % ( "\n\n>>>" + host, "Se encontre el LOGIN de Admin!")
+                decide=raw_input("Continuar el Escaneo? y/n :")
                 if decide == "y":
                     continue
                 elif decide == "n":
                     print "Saliendo."
                     os._exit(0)
                 else:
-                    print "Invalid option."
+                    checker.cRojo("Opcion Invalida.")
             elif response.status == 404:
                 var2 = var2
             elif response.status == 302:
-                print "%s %s" % ("\n>>>" + host, "Possible admin page (302 - Redirect)")
+                print "%s %s" % ("\n>>>" + host, "Posible login de Admin! (302 - Redireccionando)")
             else:
-                print "%s %s %s" % (host, " Interesting response:", response.status)
+                print "%s %s %s" % (host, " No se encontro nada:", response.status)
             connection.close()
-        print("\n\nCompleted \n")
-        print var1, " Admin pages found"
-        print var2, " total pages scanned"
-        raw_input("[/] The Game is Over; Press Enter to Exit")
+        print("\n\nCompletado \n")
+        print var1, " Paginas de Admin Encontradas"
+        print var2, " Total de paginas escaneadas"
+        raw_input("[/] El juego Termino!; Preione enter para salir.")
 
 
     if code==2:
-        print("\t [+] Scanning " + site + "...\n\n")
+        checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in asp:
             admin = admin.replace("\n","")
             admin = "/" + admin
             host = site + admin
-            print ("\t [#] Checking " + host + "...")
+            checker.cAmarillo("\t [#] Verificando " + host + "...")
             connection = httplib.HTTPConnection(site)
             connection.request("GET",admin)
             response = connection.getresponse()
             var2 = var2 + 1
             if response.status == 200:
                 var1 = var1 + 1
-                print "%s %s" % ( "\n\n>>>" + host, "Admin page found!")
-                decide=raw_input("Continue scanning? y/n :")
+                print "%s %s" % ( "\n\n>>>" + host, "Se encontre el LOGIN de Admin!")
+                decide=raw_input("Continuar el Escaneo? y/n :")
                 if decide == "y":
                     continue
                 elif decide == "n":
                     print "Saliendo."
                     os._exit(0)
                 else:                                                             
-                    print "Invalid option."
+                    checker.cRojo("Opcion Invalida.")
             elif response.status == 404:
                 var2 = var2
             elif response.status == 302:
-                print "%s %s" % ("\n>>>" + host, "Possible admin page (302 - Redirect)")
+                print "%s %s" % ("\n>>>" + host, "Posible login de Admin! (302 - Redireccionando)")
             else:
-                print "%s %s %s" % (host, " Interesting response:", response.status)
+                print "%s %s %s" % (host, " No se encontro nada:", response.status)
             connection.close()
-        print("\n\nCompleted \n")
-        print var1, " Admin pages found"
-        print var2, " total pages scanned"
-        raw_input("The Game is Over; Press Enter to Exit")
+        print("\n\nCompletado \n")
+        print var1, " Paginas de Admin Encontradas"
+        print var2, " Total de paginas escaneadas"
+        raw_input("El juego Termino!; Preione enter para salir.")
 
     if code==3:
-        print("\t [+] Scanning " + site + "...\n\n")
+        checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in cfm:
             admin = admin.replace("\n","")
             admin = "/" + admin
             host = site + admin
-            print ("\t [#] Checking " + host + "...")
+            checker.cAmarillo("\t [#] Verificando " + host + "...")
             connection = httplib.HTTPConnection(site)
             connection.request("GET",admin)
             response = connection.getresponse()
             var2 = var2 + 1
             if response.status == 200:
                 var1 = var1 + 1
-                print "%s %s" % ( "\n\n>>>" + host, "Admin page found!")
-                decide=raw_input("Continue scanning? y/n :")
+                print "%s %s" % ( "\n\n>>>" + host, "Se encontre el LOGIN de Admin!")
+                decide=raw_input("Continuar el Escaneo? y/n :")
                 if decide == "y":
                     continue
                 elif decide == "n":
                     print "Saliendo."
                     os._exit(0)
 		else:
-	            print "Invalid option."
+	            checker.cRojo("Opcion Invalida.")
             elif response.status == 404:
                 var2 = var2
             elif response.status == 302:
-                print "%s %s" % ("\n>>>" + host, "Possible admin page (302 - Redirect)")
+                print "%s %s" % ("\n>>>" + host, "Posible login de Admin! (302 - Redireccionando)")
             else:
-                print "%s %s %s" % (host, " Interesting response:", response.status)
+                print "%s %s %s" % (host, " No se encontro nada:", response.status)
             connection.close()
-        print("\n\nCompleted \n")
-        print var1, " Admin pages found"
-        print var2, " total pages scanned"
-        raw_input("The Game is Over; Press Enter to Exit")
+        print("\n\nCompletado \n")
+        print var1, " Paginas de Admin Encontradas"
+        print var2, " Total de paginas escaneadas"
+        raw_input("El juego Termino!; Preione enter para salir.")
 
     if code==4:
-        print("\t [+] Scanning " + site + "...\n\n")
+        checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in js:
             admin = admin.replace("\n","")
             admin = "/" + admin
             host = site + admin
-            print ("\t [#] Checking " + host + "...")
+            checker.cAmarillo("\t [#] Verificando " + host + "...")
             connection = httplib.HTTPConnection(site)
             connection.request("GET",admin)
             response = connection.getresponse()
             var2 = var2 + 1
             if response.status == 200:
                 var1 = var1 + 1
-                print "%s %s" % ( "\n\n>>>" + host, "Admin page found!")
-                decide=raw_input("Continue scanning? y/n :")
+                print "%s %s" % ( "\n\n>>>" + host, "Se encontre el LOGIN de Admin!")
+                decide=raw_input("Continuar el Escaneo? y/n :")
                 if decide == "y":
                     continue
                 elif decide == "n":
                     print "Saliendo."
                     os._exit(0)
                 else:
-                    print "Invalid option."
-
+                    checker.cRojo("Opcion Invalida.")
             elif response.status == 404:
                 var2 = var2
             elif response.status == 302:
-                print "%s %s" % ("\n>>>" + host, "Possible admin page (302 - Redirect)")
+                print "%s %s" % ("\n>>>" + host, "Posible login de Admin! (302 - Redireccionando)")
             else:
-                print "%s %s %s" % (host, " Interesting response:", response.status)
+                print "%s %s %s" % (host, " No se encontro nada:", response.status)
             connection.close()
-        print("\n\nCompleted \n")
-        print var1, " Admin pages found"
-        print var2, " total pages scanned"
-        raw_input("The Game is Over; Press Enter to Exit")
+        print("\n\nCompletado \n")
+        print var1, " Paginas de Admin Encontradas"
+        print var2, " Total de paginas escaneadas"
+        raw_input("El juego Termino!; Preione enter para salir.")
 
     if code==5:
-        print("\t [+] Scanning " + site + "...\n\n")
+        checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in cgi:
             admin = admin.replace("\n","")
             admin = "/" + admin
             host = site + admin
-            print ("\t [#] Checking " + host + "...")
+            checker.cAmarillo("\t [#] Verificando " + host + "...")
             connection = httplib.HTTPConnection(site)
             connection.request("GET",admin)
             response = connection.getresponse()
             var2 = var2 + 1
             if response.status == 200:
                 var1 = var1 + 1
-                print "%s %s" % ( "\n\n>>>" + host, "Admin page found!")
-                decide=raw_input("Continue scanning? y/n :")
+                print "%s %s" % ( "\n\n>>>" + host, "Se encontre el LOGIN de Admin!")
+                decide=raw_input("Continuar el Escaneo? y/n :")
                 if decide == "y":
                     continue
                 elif decide == "n":
                     print "Saliendo."
                     os._exit(0) 
                 else:
-                    print "Invalid option."
-
+                    checker.cRojo("Opcion Invalida.")
             elif response.status == 404:
                 var2 = var2
             elif response.status == 302:
-                print "%s %s" % ("\n>>>" + host, "Possible admin page (302 - Redirect)")
+                print "%s %s" % ("\n>>>" + host, "Posible login de Admin! (302 - Redireccionando)")
             else:
-                print "%s %s %s" % (host, " Interesting response:", response.status)
+                print "%s %s %s" % (host, " No se encontro nada:", response.status)
             connection.close()
-        print("\n\nCompleted \n")
-        print var1, " Admin pages found"
-        print var2, " total pages scanned"
-        raw_input("The Game is Over; Press Enter to Exit")
+        print("\n\nCompletado \n")
+        print var1, " Paginas de Admin Encontradas"
+        print var2, " Total de paginas escaneadas"
+        raw_input("El juego Termino!; Preione enter para salir.")
 
     if code==6:
-        print("\t [+] Scanning " + site + "...\n\n")
+        checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in brf:
             admin = admin.replace("\n","")
             admin = "/" + admin
             host = site + admin
-            print ("\t [#] Checking " + host + "...")
+            checker.cAmarillo("\t [#] Verificando " + host + "...")
             connection = httplib.HTTPConnection(site)
             connection.request("GET",admin)
             response = connection.getresponse()
             var2 = var2 + 1
             if response.status == 200:
                 var1 = var1 + 1
-                print "%s %s" % ( "\n\n>>>" + host, "Admin page found!")
-                decide=raw_input("Continue scanning? y/n :")
+                print "%s %s" % ( "\n\n>>>" + host, "Se encontre el LOGIN de Admin!")
+                decide=raw_input("Continuar el Escaneo? y/n :")
                 if decide == "y":
                     continue
                 elif decide == "n":
                     print "Saliendo."
                     os._exit(0)
                 else:
-                    print "Invalid option."
+                    checker.cRojo("Opcion Invalida.")
             elif response.status == 404:
                 var2 = var2
             elif response.status == 302:
-                print "%s %s" % ("\n>>>" + host, "Possible admin page (302 - Redirect)")
+                print "%s %s" % ("\n>>>" + host, "Posible login de Admin! (302 - Redireccionando)")
             else:
-                print "%s %s %s" % (host, " Interesting response:", response.status)
+                print "%s %s %s" % (host, " No se encontro nada:", response.status)
             connection.close()
-        print("\n\nCompleted \n")
-        print var1, " Admin pages found"
-        print var2, " total pages scanned"
-        raw_input("The Game is Over; Press Enter to Exit")
+        print("\n\nCompletado \n")
+        print var1, " Paginas de Admin Encontradas"
+        print var2, " Total de paginas escaneadas"
+        raw_input("El juego Termino!; Preione enter para salir.")
 except (httplib.HTTPResponse, socket.error):
     print "\n\t[!] Session Cancelled; Error occured. Check connectivity settings"
 except (KeyboardInterrupt, SystemExit):
