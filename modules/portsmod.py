@@ -14,11 +14,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
+from modules import checker
 def host():
     global target
     target=raw_input("Introduce el host al que deseas hacerle el scan: ")
     if target == "":
-        print "Host invalido."
+        checker.cRojo("Host invalido.")
         host()
     else:
         return target
@@ -26,13 +27,13 @@ def port():
     global portnumber
     portnumber=raw_input("Introduce el puerto o los puertos que deseas escanear (Si deseas un rango de puertos, escribelos de la manera 1-1000): ")
     if portnumber == "":
-        print "Puerto invalido."
+        checker.cRojo("Puerto invalido.")
         port()
     else:
         return portnumber
 def intensescan():
     host()
-    print "Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root."
+    checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
     subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target])
 def fastscan():
     host()
@@ -49,15 +50,15 @@ def escanport():
     subprocess.call(["nmap","-p",portnumber,target])
 def recsystem():
     host()
-    print "Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root."
+    checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
     subprocess.call(["sudo","nmap","-O",target])
 def enumdns():
     host()
-    print "Enumerando DNS's"
+    checker.cAmarillo("Enumerando DNS's")
     subprocess.call(["dnsenum",target])
 def bypasscloud():
     host()
-    print "Intentando Bypassear Cloudflare usando fierce..."
+    checker.cAmarillo("Intentando Bypassear Cloudflare usando fierce...")
     subprocess.call(["fierce","-dns",target])
 def menu():
     print """Por favor selecciona una de las siguientes opciones
@@ -99,5 +100,5 @@ def menu():
     elif sel == "i":
         print "Saliendo."
     else:
-        print "Opcion invalida."
+        checker.cRojo("Opcion invalida.")
         menu()         
