@@ -125,7 +125,6 @@ def gems():
         cVerde("Bundler - 0K")
         pass
     else:
-<<<<<<< HEAD
         def gemsinstall():
             print """Necesitas instalar Bundler, procediendo a la instalación.
     Bundler es requerido por un escanner de vulnerabilidades, necesitas privilegios root o sudo para instalarlo.
