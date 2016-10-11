@@ -370,60 +370,87 @@ def xsstest():
       threads.append(thread)
     for thread in threads:
       thread.join()
+
 def sitek():
-    global sitekey
-    sitekey = raw_input("\nIntroduce tu objetivo, (Si tu no conoces introduce el 1) :  ")
-    if sitekey == "":
-        print "Introduce un objetivo valido (1-5), el objetivo no puede estar vacio."
-        sitek()
-    elif sitekey not in {'1', '2', '3', '4', '5'}:
-        print "Introduce un objetivo valido (1-5)"
-        sitek()
-    else:
-        return sitekey
+    try:        
+        global sitekey
+        sitekey = raw_input("\nIntroduce tu objetivo, (Si tu no conoces introduce el 1) :  ")
+        if sitekey == "":
+            print "Introduce un objetivo valido (1-5), el objetivo no puede estar vacio."
+            sitek()
+        elif sitekey not in {'1', '2', '3', '4', '5'}:
+            print "Introduce un objetivo valido (1-5)"
+            sitek()
+        else:
+            return sitekey
+    except KeyboardInterrupt:
+        print "Regresando al menu anterior."
+    except:
+        print "Ha ocurrido un error, regresando al menu anterior."
 
 def sitedom():
-    global sitedomain
-    sitedomain=raw_input("\nIntroduce un dominio especifico (Ejemplo: com, net, org ...) si quieres buscar en multiples dominios, separalos con comas : ")
-    if sitedomain == "":
-        print "El dominio no puede estar vacio."
-        sitedom()
-    else:
-        return sitedomain
+    try:
+        global sitedomain
+        sitedomain=raw_input("\nIntroduce un dominio especifico (Ejemplo: com, net, org ...) si quieres buscar en multiples dominios, separalos con comas : ")
+        if sitedomain == "":
+            print "El dominio no puede estar vacio."
+            sitedom()
+        else:
+            return sitedomain
+    except KeyboardInterrupt:
+        print "Regresando al menu anterior."
+    except:
+        print "Ha ocurrido un error, regresando al menu anterior."
 
 def dorkk():
-    global inurl
-    inurl=raw_input("\nIntroduce tu dork ( Un dork es similar a php?id= ), si deseas ver una URL con ejemplos de dorks, escriba 'urldorks' si quieres obtener la lista de dorks en una URL: ")
-    if inurl == "":
-        print "El dork no puede estar vacio."
-        dorkk()
-    elif inurl == "urldorks" or inurl == "'urldorks'":
-        print "\nSubiendo los dorks al paste, por favor abra la URL resultante despues de esto."
-        os.system("cat modules/vulns/dorks.txt | curl -F 'sprunge=<-' http://sprunge.us")
-        dorkk()
-    else:
-        return inurl
+    try:
+        global inurl
+        inurl=raw_input("\nIntroduce tu dork ( Un dork es similar a php?id= ), si deseas ver una URL con ejemplos de dorks, escriba 'urldorks' si quieres obtener la lista de dorks en una URL: ")
+        if inurl == "":
+            print "El dork no puede estar vacio."
+            dorkk()
+        elif inurl == "urldorks" or inurl == "'urldorks'":
+            print "\nSubiendo los dorks al paste, por favor abra la URL resultante despues de esto."
+            os.system("cat modules/vulns/dorks.txt | curl -F 'sprunge=<-' http://sprunge.us")
+            dorkk()
+        else:
+            return inurl
+    except KeyboardInterrupt:
+        print "Regresando al menu anterior."
+    except:
+        print "Ha ocurrido un error, regresando al menu anterior."
 
 def thrreads():
-    global numthreads
-    numthreads=raw_input("\nIntroduce el numero de threads (1-10), sino conoces introduce 10 : ")
-    if numthreads == "":
-        print "El numero de threads no puede estar vacio."
-        thrreads()
-    elif numthreads not in {'1', '2', '3', '4', '5', '6', '7', '8', '9', '10'}:
-        print "El numero de threads en invalido."
-        thrreads()
-    else:
-        return numthreads
+    try:
+        global numthreads
+        numthreads=raw_input("\nIntroduce el numero de threads (1-10), sino conoces introduce 10 : ")
+        if numthreads == "":
+            print "El numero de threads no puede estar vacio."
+            thrreads()
+        elif numthreads not in {'1', '2', '3', '4', '5', '6', '7', '8', '9', '10'}:
+            print "El numero de threads en invalido."
+            thrreads()
+        else:
+            return numthreads
+    except KeyboardInterrupt:
+        print "Regresando al menu anterior."
+    except:
+        print "Ha ocurrido un error, regresando al menu anterior."
 
 def pagess():
-    global maxc
-    maxc=raw_input("\nIntroduce el numero de paginas en las que deseas buscar, entre mas paginas, mas resultados: ")
-    if maxc == "":
-        print "El numero de paginas no puede estar vacio."
-        pagess()
-    else:
-        return maxc
+    try:
+        global maxc
+        maxc=raw_input("\nIntroduce el numero de paginas en las que deseas buscar, entre mas paginas, mas resultados: ")
+        if maxc == "":
+            print "El numero de paginas no puede estar vacio."
+            pagess()
+        else:
+            return maxc
+    except KeyboardInterrupt:
+        print "Regresando al menu anterior."
+    except:
+        print "Ha ocurrido un error, regresando al menu anterior."
+
 menu = True
 new = 1
 while menu == True:
