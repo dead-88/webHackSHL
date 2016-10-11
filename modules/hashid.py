@@ -15,9 +15,11 @@
 
 import subprocess
 import os
+import checker
 
 def menu():
-    print """Elige la tarea que quieres realizar:
+    checker.cAmarillo("Elige la tarea que quieres realizar:")
+    print """
     a) Identificacion de hashes.
     b) Desencriptacion de Hashes online y Wordlist para bruteforce.
     c) Salir.
@@ -28,13 +30,14 @@ def menu():
             os.system("python2 modules/hashidentifier")
             menu()
         elif option == "b":
-            print """Utiliza las siguientes direcciones Web para buscar tus hash.
+            checker.cAmarillo("Utiliza las siguientes direcciones Web para buscar tus hash.")
+            print """
             1) Para hash MD5 - https://hashkiller.co.uk/md5-decrypter.aspx
             2) Para hash Sha-1 - https://hashkiller.co.uk/sha1-decrypter.aspx
             3) Para claves WPA/WPA2 - https://hashkiller.co.uk/wpa-crack.aspx
             4) Para hash NTML https://hashkiller.co.uk/ntlm-decrypter.aspx
             """
-            print "Adicionalmente puedes descargar tus wordlist para ataques de fuerza bruta directamente desde aquí: "
+            checker.cRojo("Adicionalmente puedes descargar tus wordlist para ataques de fuerza bruta directamente desde aquí: ")
             os.system("cat modules/wordlist/worlists.txt | curl -F 'sprunge=<-' http://sprunge.us")
             print ""
             
