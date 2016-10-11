@@ -13,18 +13,20 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import subprocess
+import checker
+
 def rsk():
     try:
         global risk
         risk=int(raw_input("Introduce tu valor para --risk (1-3): "))
         if risk < 1 or risk > 3:
-            print "El valor solo puede ser de 1 a 3."
+            checker.cRojo("El valor solo puede ser de 1 a 3.")
             rsk()
         else:
             risk=str(risk)
             return risk
     except ValueError:
-        print "Por favor, el valor solo puede ser numerico."
+        checker.cRojo("Por favor, el valor solo puede ser numerico.")
         rsk()
     except KeyboardInterrupt:
         print "Saliendo."
@@ -34,13 +36,13 @@ def lev():
         global level
         level=int(raw_input("Introduce tu valor para --level (1-5): "))
         if level < 1 or level > 5:
-            print "El valor solo puede ser de 1 a 5."
+            checker.cRojo("El valor solo puede ser de 1 a 5.")
             lev()
         else:
             level=str(level)
             return level
     except ValueError:
-        print "Por favor, el valor solo puede ser numerico."
+        checker.cRojo("Por favor, el valor solo puede ser numerico.")
         lev()
     except KeyboardInterrupt:
         print "Saliendo."
@@ -114,31 +116,32 @@ def postcolumns():
         postcolumns()
 
 def isdba():
-    print "Comprobando si el usuario actual es root de MySQL ..."
+    checker.cAmarillo("Comprobando si el usuario actual es root de MySQL ...")
     outp = open("modules/sqlopt/output.txt", "w")
     subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--is-dba"],stdout=outp)
     if 'current user is DBA:    False' in open('modules/sqlopt/output.txt').read():
         print "El usuario no es root."
     elif 'current user is DBA:    True' in open('modules/sqlopt/output.txt').read():
-        print "El usuario es root!, esto es fascinante!!."
+        checker.cVerde("El usuario es root!, esto es fascinante!!.")
     else:
-        print "Resultado inesperado."
+        checker.cRojo("Resultado inesperado.")
 
 def dumpall():
-    print """Dumpeando toda la base de datos, esto puede tomar un largo tiempo...
+    checker.cRojo("""Dumpeando toda la base de datos, esto puede tomar un largo tiempo...
     Continue solo en caso de que sepa lo que esta haciendo.
-    """
+    """)
     decide=raw_input("Deseas continuar? (y/n): ")
     if decide == "y":
         subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--dump-all"])
     elif decide == "n":
         print "Saliendo."
     else:
-        print "Opcion equivovada, por favor verifique."
+        checker.cRojo("Opcion equivovada, por favor verifique.")
         dumpall()
 
 def postsqli():
-    print """ Elige lo que quieres hacer:
+    checker.cAmarillo(" Elige lo que quieres hacer:")
+    print """
         a) Extraer todas las tablas de una base de datos.
         b) Extraer todas las columnas de una tabla.
         c) Extraer todo de una o mas columnas.
@@ -166,7 +169,8 @@ def postsqli():
         postsqli()
 
 def execute():
-    print"""Selecciona tu opcion:
+    checker.cAmarillo("Selecciona tu opcion:")
+    print """
     a) Sqli usando sqlmap sin proxy.
     b) Sqli usando sqlmap con TOR.
     c) Sqli usando post inyeccion.
