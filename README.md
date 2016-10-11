@@ -13,7 +13,7 @@ Abran la Terminal:
 
 ~$ sudo apt install git
 
-luego
+luego:
 
 ~$ git clone https://github.com/SecHackLabs/WebHackSHL.git
 
