@@ -28,7 +28,7 @@ isgit=os.path.isfile("/usr/bin/git")
 def cRojo(prt): print("\033[91m {}\033[00m" .format(prt))
 def cVerde(prt): print("\033[92m {}\033[00m" .format(prt))
 def cAmarillo(prt): print("\033[93m {}\033[00m" .format(prt))
-def cMordaclaro(prt): print("\033[94m {}\033[00m" .format(prt))
+def cMoradoclaro(prt): print("\033[94m {}\033[00m" .format(prt))
 def cMorado(prt): print("\033[95m {}\033[00m" .format(prt))
 def cCian(prt): print("\033[96m {}\033[00m" .format(prt))
 def cGrisclaro(prt): print("\033[97m {}\033[00m" .format(prt))
@@ -60,30 +60,30 @@ def updatetools():
         updatetools()
 
 def installall():
-    print """Para que este framework funcione correctamente, necesitas tener instaladas las siguientes herramientas:
+    cRojo("""Para que este framework funcione correctamente, necesitas tener instaladas las siguientes herramientas:
     nmap, fierce, sqlmap, dnsenum, nikto, whatweb & wpscan. Al parecer hay herramientas faltantes en tu sistema!.
     ¿Deseas instalar todas las herramientas necesarias? Esto solo funciona con sistemas basados en Debian.
-    """
+    """)
     decision=raw_input("Introduce tu opcion y=continua con la instalación, n=anula la instalación. y/n: ")
     if decision=="y":
-        print "Para realizar esta instalación necesitas privilegios root o sudo, por favor introduzca tus credenciales cuando se le soliciten."
-        print "Añadiendo el repositorio temporal de Kali a tu lista de repossitorios ..."
+        cRojo("Para realizar esta instalación necesitas privilegios root o sudo, por favor introduzca tus credenciales cuando se le soliciten.")
+        cAmarillo("Añadiendo el repositorio temporal de Kali a tu lista de repossitorios ...")
         os.system("sudo echo -e '\ndeb http://http.kali.org/kali kali-rolling main contrib non-free' | sudo tee -a /etc/apt/sources.list.d/kalitemp.list")
         print ""
-        print "Importando las claves de GNU/Kali Linux para ejecutar la instalacion..."
+        cAmarillo("Importando las claves de GNU/Kali Linux para ejecutar la instalacion...")
         os.system("sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com ED444FF07D8D0BF6")
         print ""
-        print "Actualizando tu lista de paquetes ..."
+        cAmarillo("Actualizando tu lista de paquetes ...")
         os.system("sudo apt update")
         os.system("clear")
-        print "Instalando los paquetes ..."
+        cAmarillo("Instalando los paquetes ...")
         os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl")
         print ""
-        print "Removiendo el repositorio temporal de Kali Linux ..."
+        cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
         os.system("clear")
-        print "La instalacion se realizo correctamente."
-        print "Todo lo necesario esta instalado, procediendo."
+        cVerde("La instalacion se realizo correctamente.")
+        cVerde("Todo lo necesario esta instalado, procediendo.")
     elif decision == "n":
         print "Instalación abortada, saliendo ..."
         os._exit(0)

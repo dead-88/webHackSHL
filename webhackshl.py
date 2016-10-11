@@ -81,7 +81,7 @@ Uso: python webhackshl.py -h - Muestra un mensaje de ayuda.
 """
 
 def disclaimer():
-    print "Advertencia legal: El uso de WebHackSHL para atacar objetivos sin el consentimiento mutuo previo es ilegal. Es responsabilidad del usuario final a obedecer todas las leyes aplicables locales, estatales y federales. Los desarrolladores no asumen ninguna responsabilidad y no son responsables de cualquier mal uso o daño causado por este programa"
+    checker.cRojo("Advertencia legal: El uso de WebHackSHL para atacar objetivos sin el consentimiento mutuo previo es ilegal. Es responsabilidad del usuario final a obedecer todas las leyes aplicables locales, estatales y federales. Los desarrolladores no asumen ninguna responsabilidad y no son responsables de cualquier mal uso o daño causado por este programa")
 try:
     logo()
     print ""
@@ -92,8 +92,9 @@ try:
     gems()
     def webframework():
         print ""
-        print """Selecciona una de las siguientes opciones.
-        a) Buscar URLs vulnerables a SQLi, LFI, RCE, XSS.
+        checker.cAmarillo("""Selecciona una de las siguientes opciones.""")
+        print """
+	a) Buscar URLs vulnerables a SQLi, LFI, RCE, XSS.
         b) Realizar SQLi a una web vulnerable a SQLi.
         c) Realizar un escaneo completo de un host, enumerar DNS, Bypassear Cloudflare y mas.
 	d) Realizar pruebas de penetracion web y analisis de vulnerabilidades.
