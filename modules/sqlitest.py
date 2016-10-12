@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#-*- coding: UTF-8 -*-
 # This was written for educational purpose and pentest only. Use it at your own risk.
 # Author will be not responsible for any damage!
 
