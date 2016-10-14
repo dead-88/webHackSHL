@@ -6,7 +6,7 @@ Uso:
 
 ~$ python2 webhackshl.py
 
-Actualizar la herramienta: python2 webhackshl.py -u
+Actualizar la herramienta: ~$ python2 webhackshl.py -u
 
 # Como Descargar de GitHub Nuestra Herramienta.
 Abran la Terminal:
