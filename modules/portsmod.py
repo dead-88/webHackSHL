@@ -38,7 +38,7 @@ def intensescan():
     subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target])
 def fastscan():
     host()
-    subprocess.call(["nmap","-F",target])
+    subprocess.call(["nmap","--open","-F",target])
 def detectserv():
     host()
     subprocess.call(["nmap","-sP",target])
