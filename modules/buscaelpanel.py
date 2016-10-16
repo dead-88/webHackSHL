@@ -375,9 +375,9 @@ try:
         print("\n\nCompletado \n")
         print var1, " Paginas de Admin Encontradas"
         print var2, " Total de paginas escaneadas"
-        raw_input("El juego Termino!; Preione enter para salir.")
+        raw_input("El juego Termino!; Precione enter para salir.")
 except (httplib.HTTPResponse, socket.error):
-    print "\n\t[!] Session Cancelled; Error occured. Check connectivity settings"
+    print "\n\t[!] Sesion Cancelada; Error ocurrido. Verifca la configuracion de conexion"
 except (KeyboardInterrupt, SystemExit):
-    print "\n\t[!] Session cancelled"
+    print "\n\t[!] Sesion cancelada"
 
