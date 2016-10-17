@@ -503,7 +503,7 @@ while menu == True:
   print "[6] SQLi y XSS Testing"
   print "[7] LFI - RCE y XSS Testing"
   print "[8] SQLi,LFI - RCE y XSS Testing"
-  print "[9] Save valid urls to file"
+  print "[9] Guardar URL validas en un Archivo"
   print "[10] Mostrar URLS validas"
   print "[11] Encontrar vulnerabilidades en el ultimo scan"
   print "[12] Nuevo Scan\n"
