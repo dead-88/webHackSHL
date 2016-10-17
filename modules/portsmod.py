@@ -126,7 +126,7 @@ def bypasscloud():
         logsalida=logs.randomarch("bypass/","BYPASSER",".log")
         checker.cAmarillo("Intentando Bypassear Cloudflare usando fierce...")
         subprocess.call(["fierce","-dns",target,"-fulloutput",logsalida])
-   elif resp=="n":
+    elif resp=="n":
         host()
         subprocess.call(["fierce","-dns",target])
 
