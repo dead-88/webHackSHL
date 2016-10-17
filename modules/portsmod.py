@@ -15,6 +15,7 @@
 
 import subprocess
 import checker
+from modules import logs
 
 def host():
     global target
@@ -24,6 +25,7 @@ def host():
         host()
     else:
         return target
+
 def port():
     global portnumber
     portnumber=raw_input("Introduce el puerto o los puertos que deseas escanear (Si deseas un rango de puertos, escribelos de la manera 1-1000): ")
@@ -32,35 +34,102 @@ def port():
         port()
     else:
         return portnumber
+
 def intensescan():
-    host()
-    checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
-    subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("nmap-full/","NMAP-FULL",".log")
+        checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
+        subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target,"-oN",logsalida])
+    elif resp=="n":
+        host()
+        checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
+        subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target])
+
 def fastscan():
-    host()
-    subprocess.call(["nmap","--open","-F",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("nmap-rapido/","NMAP-Rapido",".log")
+        subprocess.call(["nmap","--open","-F",target,"-oN",logsalida])
+    elif resp=="n":
+        host()
+        subprocess.call(["nmap","--open","-F",target])
+
 def detectserv():
-    host()
-    subprocess.call(["nmap","-sP",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("nmap-servhost/","SERV-HOST",".log")
+        subprocess.call(["nmap","-sP",target,"-oN",logsalida])
+    elif resp=="n":
+        host()
+        subprocess.call(["nmap","-sP",target])
+
 def detectver():
-    host()
-    subprocess.call(["nmap","-sV",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("nmap-serviciosver/","SERVICIO-VER",".log")
+        subprocess.call(["nmap","-sV",target,"-oN",logsalida])
+    elif resp=="n":
+        host()
+        subprocess.call(["nmap","-sV",target])
+
 def escanport():
-    host()
-    port()
-    subprocess.call(["nmap","-p",portnumber,target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        port()
+        logsalida=logs.randomarch("nmap-puertorango/","PUERTORANGO",".log")
+        subprocess.call(["nmap","-p",portnumber,target,"-oN",logsalida])
+    elif resp=="n":
+        host()
+        port()
+        subprocess.call(["nmap","-p",portnumber,target])
+
 def recsystem():
-    host()
-    checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
-    subprocess.call(["sudo","nmap","-O",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("nmap-so-host/","SYTEMOPERHOST",".log")
+        checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
+        subprocess.call(["sudo","nmap","-O",target,"-oN",logsalida])
+    elif resp=="n":
+        host()
+        subprocess.call(["sudo","nmap","-O",target])
+
 def enumdns():
-    host()
-    checker.cAmarillo("Enumerando DNS's")
-    subprocess.call(["dnsenum",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("dnsenum/","DNSENUM",".xml")
+        checker.cAmarillo("Enumerando DNS's")
+        subprocess.call(["dnsenum",target,"-o",logsalida])
+    elif resp=="n":
+        host()
+        subprocess.call(["dnsenum",target])
+
 def bypasscloud():
-    host()
-    checker.cAmarillo("Intentando Bypassear Cloudflare usando fierce...")
-    subprocess.call(["fierce","-dns",target])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        host()
+        logsalida=logs.randomarch("bypass/","BYPASSER",".log")
+        checker.cAmarillo("Intentando Bypassear Cloudflare usando fierce...")
+        subprocess.call(["fierce","-dns",target,"-fulloutput",logsalida])
+   elif resp=="n":
+        host()
+        subprocess.call(["fierce","-dns",target])
+
 def menu():
     checker.cAmarillo("Por favor selecciona una de las siguientes opciones")
     print """
