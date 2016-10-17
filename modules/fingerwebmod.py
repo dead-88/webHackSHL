@@ -16,24 +16,47 @@
 import subprocess
 import portsmod
 import checker
+from modules import logs
 
 def whatw():
-    web=portsmod.host()
-    checker.cAmarillo("Obteniendo informacion del sitio web.")
-    print ""
-    subprocess.call(["whatweb","-v",web])
-    execute()
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        web=portsmod.host()
+        checker.cAmarillo("Obteniendo informacion del sitio web.")
+        print ""
+        logsalida=logs.randomarch("whatweb/","WHATWEB",".log")
+        subprocess.call(["whatweb","-v", web, "--log-verbose",logsalida])
+        checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+    elif resp=="n":
+        web=portsmod.host()
+        checker.cAmarillo("Obteniendo informacion del sitio web.")
+        print ""
+        subprocess.call(["whatweb","-v", web])
+        execute()
+
 def nickscan():
-    web=portsmod.host()
-    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando nikto...")
-    subprocess.call(["nikto","-no404","-host",web])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        web=portsmod.host()
+        checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando nikto...")
+        logsalida=logs.randomarch("nikto/","NIKTO",".html")
+        subprocess.call(["nikto","-no404","-host",web,"-o",logsalida])
+        checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+    elif resp=="n":
+        web=portsmod.host()
+        checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando nikto...")
+        subprocess.call(["nikto","-no404","-host",web])
     execute()
+
 def joomsc():
     web=portsmod.host()
     checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando joomlavs...")
     subprocess.call(["chmod","+x","joomlavs"])
     subprocess.call(["./joomlavs","-u",web,"-a"])
     execute()
+
 def joomsctor():
     web=host=portsmod.host()
     checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando joomlavs usando TOR...")
@@ -42,14 +65,31 @@ def joomsctor():
     execute()
 
 def wordpresscan():
-    web=portsmod.host()
-    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando wpscan...")
-    subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u"])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        web=portsmod.host()
+        logsalida=logs.randomarch("wpscan/","WPSCAN",".log")
+        subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--log",logsalida])
+        checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+    elif resp=="n":
+        web=portsmod.host()
+        subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u"])
     execute()
+
 def wordpresscantor():
-    web=portsmod.host()
-    checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando wpscan...")
-    subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050"])
+    checker.cRojo("Desea Guardar el logs de la informacion? y/n : ")
+    resp=raw_input("Introduce tu Respuesta y/n : ")
+    if resp=="y":
+        web=portsmod.host()
+        logsalida=logs.randomarch("wpscan/","WPSCAN",".log")
+        web=portsmod.host()
+        checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando wpscan...")
+        subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050","--log",logsalida])
+        checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+    elif resp=="n":
+        web=portsmod.host()
+        subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050"])
     execute()
 
 def execute():
