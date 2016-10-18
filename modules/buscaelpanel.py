@@ -21,6 +21,7 @@ import socket
 import sys
 import checker
 
+
 try:
     print "\t#####################################################"
     print "\t#    Programador: Eduard Eliecer Tolosa Toloza      #"
@@ -156,7 +157,7 @@ try:
 'adminarea/admin.brf','adminarea/login.brf','panel-administracion/index.brf','panel-administracion/admin.brf','modelsearch/index.brf',
 'modelsearch/admin.brf','admincontrol/login.brf','adm/admloginuser.brf','admloginuser.brf','admin2.brf','admin2/login.brf','admin2/index.brf','usuarios/login.brf',
 'adm/index.brf','adm.brf','affiliate.brf','adm_auth.brf','memberadmin.brf','administratorlogin.brf']
-    
+
     try:
         site = raw_input("Escribe el Nombre del Dominio: ")
         site = site.replace("http://","")
@@ -165,7 +166,7 @@ try:
         conn.connect()
         checker.cVerde("\t[$] SI... El servidor esta online.")
     except (httplib.HTTPResponse, socket.error) as Exit:
-        raw_input("\t [!] Oops Error occured, Server may be offline or invalid URL")
+        raw_input("\t [!] Ups ha Ocurrido un error, Servidor Offline o Url invalida")
         exit()
     print "Introduce el codigo del sitio.:"
     print "1 PHP, 2 ASP, 3 CFM, 4 JS, 5 CGI, 6 BRF"
