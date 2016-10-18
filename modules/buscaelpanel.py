@@ -171,7 +171,7 @@ try:
     print "1 PHP, 2 ASP, 3 CFM, 4 JS, 5 CGI, 6 BRF"
     print "\nPress 1 and 'Enter' to Select PHP, 2 for ASP etc...\n"
     code=input("> ")
-        
+
     if code==1:
         checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
         for admin in php:
@@ -205,7 +205,6 @@ try:
         print var1, " Paginas de Admin Encontradas"
         print var2, " Total de paginas escaneadas"
         raw_input("[/] El juego Termino!; Preione enter para salir.")
-
 
     if code==2:
         checker.cAmarillo("\t [+] Escaneando " + site + "...\n\n")
@@ -378,6 +377,5 @@ try:
         raw_input("El juego Termino!; Precione enter para salir.")
 except (httplib.HTTPResponse, socket.error):
     print "\n\t[!] Sesion Cancelada; Error ocurrido. Verifca la configuracion de conexion"
-except (KeyboardInterrupt, SystemExit):
+except (KeyboardInterrupt, SystemExit, IndentationError, SyntaxError):
     print "\n\t[!] Sesion cancelada"
-
