@@ -54,7 +54,7 @@ def joomsc():
     web=portsmod.host()
     checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando joomlavs...")
     subprocess.call(["chmod","+x","joomlavs"])
-    subprocess.call(["./joomlavs","-u",web,"-a"])
+    subprocess.call(["ruby joomlavs","-u",web,"-a"])
     execute()
 
 def joomsctor():
