@@ -43,7 +43,11 @@ def intensescan():
         logsalida=logs.randomarch("nmap-full/","NMAP-FULL",".log")
         checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
         subprocess.call(["sudo","nmap","-A","-T4","-sS","-Pn","-O","-sV","-p","1-10000","-v",target,"-oN",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
@@ -56,7 +60,11 @@ def fastscan():
         host()
         logsalida=logs.randomarch("nmap-rapido/","NMAP-Rapido",".log")
         subprocess.call(["nmap","--open","-F",target,"-oN",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         subprocess.call(["nmap","--open","-F",target])
@@ -68,7 +76,11 @@ def detectserv():
         host()
         logsalida=logs.randomarch("nmap-servhost/","SERV-HOST",".log")
         subprocess.call(["nmap","-sP",target,"-oN",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         subprocess.call(["nmap","-sP",target])
@@ -80,7 +92,11 @@ def detectver():
         host()
         logsalida=logs.randomarch("nmap-serviciosver/","SERVICIO-VER",".log")
         subprocess.call(["nmap","-sV",target,"-oN",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         subprocess.call(["nmap","-sV",target])
@@ -93,7 +109,11 @@ def escanport():
         port()
         logsalida=logs.randomarch("nmap-puertorango/","PUERTORANGO",".log")
         subprocess.call(["nmap","-p",portnumber,target,"-oN",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         port()
@@ -107,7 +127,11 @@ def recsystem():
         logsalida=logs.randomarch("nmap-so-host/","SYTEMOPERHOST",".log")
         checker.cRojo("Para este tipo de escaneo necesitas privilegios sudo o root, por favor introduzca su contrasena si no eres root.")
         subprocess.call(["sudo","nmap","-O",target,"-oN",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         subprocess.call(["sudo","nmap","-O",target])
@@ -120,7 +144,11 @@ def enumdns():
         logsalida=logs.randomarch("dnsenum/","DNSENUM",".xml")
         checker.cAmarillo("Enumerando DNS's")
         subprocess.call(["dnsenum",target,"-o",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         subprocess.call(["dnsenum",target])
@@ -133,7 +161,11 @@ def bypasscloud():
         logsalida=logs.randomarch("bypass/","BYPASSER",".log")
         checker.cAmarillo("Intentando Bypassear Cloudflare usando fierce...")
         subprocess.call(["fierce","-dns",target,"-fulloutput",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         host()
         subprocess.call(["fierce","-dns",target])
