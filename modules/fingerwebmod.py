@@ -27,7 +27,11 @@ def whatw():
         print ""
         logsalida=logs.randomarch("whatweb/","WHATWEB",".log")
         subprocess.call(["whatweb","-v", web, "--log-verbose",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         web=portsmod.host()
         checker.cAmarillo("Obteniendo informacion del sitio web.")
@@ -43,7 +47,11 @@ def nickscan():
         checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando nikto...")
         logsalida=logs.randomarch("nikto/","NIKTO",".html")
         subprocess.call(["nikto","-no404","-host",web,"-o",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         web=portsmod.host()
         checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando nikto...")
@@ -71,7 +79,11 @@ def wordpresscan():
         web=portsmod.host()
         logsalida=logs.randomarch("wpscan/","WPSCAN",".log")
         subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--log",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         web=portsmod.host()
         subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u"])
@@ -86,7 +98,11 @@ def wordpresscantor():
         web=portsmod.host()
         checker.cAmarillo("Buscando vulnerabilidades en el sitio web usando wpscan...")
         subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050","--log",logsalida])
+        print ""
+        checker.cAmarillo("--------------------------------------------------------")
         checker.cRojo(["Tu log se ha Guardado en la ruta: ",logsalida])
+        checker.cAmarillo("--------------------------------------------------------")
+        print ""
     elif resp=="n":
         web=portsmod.host()
         subprocess.call(["sudo","wpscan","-u",web,"--enumerate","p","--enumerate","t","--enumerate","u","--proxy","socks5://127.0.0.1:9050"])
