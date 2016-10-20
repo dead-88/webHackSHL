@@ -4,3 +4,4 @@ modules/vulns/sqli.txt
 modules/vulns/rce.txt
 modules/vulns/xss.txt
 modules/sqlopt/output.txt
+*.log
