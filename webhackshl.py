@@ -90,10 +90,9 @@ try:
         if sel == "a":
             try:
                 os.system("python2 modules/sqlitest.py")    
-                fingerwebmod.execute()
                 webframework()
             except KeyboardInterrupt:
-                fingerwebmod.execute()
+                webframework()
         elif sel == "b":
             try:
                 sqlimod.execute()
