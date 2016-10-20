@@ -121,10 +121,13 @@ def isdba():
     subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--is-dba"],stdout=outp)
     if 'current user is DBA:    False' in open('modules/sqlopt/output.txt').read():
         print "El usuario no es root."
+        outp.close()
     elif 'current user is DBA:    True' in open('modules/sqlopt/output.txt').read():
         checker.cVerde("El usuario es root!, esto es fascinante!!.")
+        outp.close()
     else:
         checker.cRojo("Resultado inesperado.")
+        outp.close()
 
 def dumpall():
     checker.cRojo("""Dumpeando toda la base de datos, esto puede tomar un largo tiempo...
