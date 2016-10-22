@@ -48,31 +48,37 @@ def lev():
         print "Saliendo.\n"
       
 def urlglob():
-    global url
-    url=raw_input("introduce la url vulnerable: ")
-    if url != "" and "?" in url and "." in url:
-        return url
-    elif url == "":
-        checker.cRojo("La URL está vacia, intentelo de nuevo.\n")
-        urlglob()
-    elif "?" not in url:
-        checker.cRojo("Necesitas introducir un parametro inyectable por ejemplo '?id', intentalo de nuevo.\n")
-        urlglob()
-    else:
-        checker.cRojo("Tu URL es invalida, por favor intentalo de nuevo.\n")
-        urlglob()
+    try:
+        global url
+        url=raw_input("introduce la url vulnerable: ")
+        if url != "" and "?" in url and "." in url:
+            return url
+        elif url == "":
+            checker.cRojo("La URL está vacia, intentelo de nuevo.\n")
+            urlglob()
+        elif "?" not in url:
+            checker.cRojo("Necesitas introducir un parametro inyectable por ejemplo '?id', intentalo de nuevo.\n")
+            urlglob()
+        else:
+            checker.cRojo("Tu URL es invalida, por favor intentalo de nuevo.\n")
+            urlglob()
+    except KeyboardInterrupt:
+        print "Saliendo.\n"
 
 def postglob():
-    global post
-    post=raw_input("introduce los datos post para la inyeccion sqli: ")
-    if post != "":
-        return post
-    elif post == "":
-        checker.cRojo("Los datos de POST inyeccion están vacios, intentelo de nuevo.\n")
-        postglob()
-    else:
-        checker.cRojo("Los datos post son invalidos, intentalo de nuevo.\n")
-        postglob()
+    try:
+        global post
+        post=raw_input("introduce los datos post para la inyeccion sqli: ")
+        if post != "":
+            return post
+        elif post == "":
+            checker.cRojo("Los datos de POST inyeccion están vacios, intentelo de nuevo.\n")
+            postglob()
+        else:
+            checker.cRojo("Los datos post son invalidos, intentalo de nuevo.\n")
+            postglob()
+    except KeyboardInterrupt:
+        print "Saliendo.\n"
 
 def sqlinorm():
     urlglob()
