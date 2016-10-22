@@ -50,7 +50,7 @@ def lev():
 def urlglob():
     global url
     url=raw_input("introduce la url vulnerable: ")
-    if url != "" and "?" in url:
+    if url != "" and "?" in url and "." in url:
         return url
     elif url == "":
         checker.cRojo("La URL está vacia, intentelo de nuevo.\n")
@@ -91,7 +91,7 @@ def sqlitor():
 def sqlipost():
     global url
     url=raw_input("introduce la url vulnerable: ")
-    if url != "":
+    if url != "" and "." in url:
         postglob()
         lev()
         rsk()
@@ -104,7 +104,7 @@ def sqlipost():
 def sqlipostor():
     global url
     url=raw_input("introduce la url vulnerable: ")
-    if url != "":
+    if url != "" and "." in url:
         postglob()
         lev()
         rsk()
