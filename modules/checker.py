@@ -36,8 +36,17 @@ def cGrisclaro(prt): print("\033[97m {}\033[00m" .format(prt))
 def cNegro(prt): print("\033[98m {}\033[00m" .format(prt))
 
 
+def checkali():
+    cCian("verificando si existen los repositorios de kali-rolling")
+    kalic=os.system("cat /etc/apt/sources.list | grep 'deb http://http.kali.org/kali kali-rolling main contrib non-free'")
+    if kalic == 0:
+        cRojo("Los repositorios de Kali-rolling Existen")
+        repokali()
+    else:
+        cRojo("Los Repositorios de Kali-rolling No existes y se añadiran para continuar")
+        updatetools()
+
 def updatetools():
-    cRojo("Desea actualizar las Herramientas utilizadas en tu Sistema?.")
     respuesta=raw_input("Introduce tu opcion y=continua con la instalación, n=anula la instalación. y/n: ")
     if respuesta=="y":
         cAmarillo("Para realizar esta instalación necesitas privilegios root o sudo, por favor introduzca tus credenciales cuando se le soliciten.")
@@ -51,6 +60,25 @@ def updatetools():
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
+        cRojo("La actualizacion se realizo correctamente.")
+        cRojo("Todo lo necesario esta actualizado, procediendo.")
+    elif respuesta == "n":
+        cAmarillo("Actualizacion abortada, saliendo ...")
+        os._exit(0)
+    else:
+        cRojo("Opcion incorrecta.")
+        updatetools()
+
+def repokali():
+    respuesta=raw_input("Introduce tu opcion y=continua con la instalación, n=anula la instalación. y/n: ")
+    if respuesta=="y":
+        cAmarillo("Para realizar esta instalación necesitas privilegios root o sudo, por favor introduzca tus credenciales cuando se le soliciten.")
+        print ""
+        cAmarillo("Actualizando tu lista de paquetes ...")
+        os.system("sudo apt update")
+        cAmarillo("actualizando Herramientas del sistema...")
+        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor")
+        print ""
         cRojo("La actualizacion se realizo correctamente.")
         cRojo("Todo lo necesario esta actualizado, procediendo.")
     elif respuesta == "n":
