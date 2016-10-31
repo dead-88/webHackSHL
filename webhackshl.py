@@ -46,7 +46,7 @@ if args.utools:
 
 # Version de la herramienta.
 if args.version:
-    print ("Versión: ",version)
+    print "Versión: ",version
     os._exit(0)
 
 def logo():
