@@ -52,10 +52,10 @@ def descargarwdls():
         wordlstkali=raw_input("Introduce una opcion y/n:  ")
         if wordlstkali == "y":
             print "Descargando paquetes ..."
-            os.system("git clone git://git.kali.org/packages/wordlists.git")
+            os.system("git clone git://git.kali.org/packages/wordlists.git modules/wordlists")
             print "Descomprimiendo WordList..."
-            os.system("cd wordlists && gzip -d rockyou.txt.gz")
-	    if _ == 0:
+            sinmp=os.system("cd modules/wordlists && gzip -d rockyou.txt.gz")
+	    if sinmp == 0:
                 print "Descompresion exitosa.."
 		print "Regresando al menú anterior, todo esta listo para desencriptar."
                 hashid.menu()
