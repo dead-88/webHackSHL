@@ -58,7 +58,7 @@ def updatetools():
         cAmarillo("Actualizando tu lista de paquetes ...")
         os.system("sudo apt update")
         cAmarillo("actualizando Herramientas del sistema...")
-        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip hashcat")
+        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip john")
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
@@ -80,7 +80,7 @@ def repokali():
         cAmarillo("Actualizando tu lista de paquetes ...")
         os.system("sudo apt update")
         cAmarillo("actualizando Herramientas del sistema...")
-        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip hashcat")
+        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip john")
         print ""
         cRojo("La actualizacion se realizo correctamente.")
         cRojo("Todo lo necesario esta actualizado, procediendo.")
@@ -109,7 +109,7 @@ def installall():
         os.system("sudo apt update")
         os.system("clear")
         cAmarillo("Instalando los paquetes ...")
-        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip hashcat")
+        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip john")
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
