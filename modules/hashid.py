@@ -16,20 +16,55 @@
 import subprocess
 import os
 import checker
+import johnmod
 
 def menu():
-    checker.cAmarillo("Elige la tarea que quieres realizar:")
+    checker.cAmarillo("\nElige la tarea que quieres realizar:")
     print """
     a) Identificacion de hashes.
-    b) Desencriptacion de Hashes online y Wordlist para bruteforce.
-    c) Salir.
+    b) Desencriptación de hashes usando John The Ripper + Wordlists.
+    c) Desencriptacion de Hashes online y Wordlist para bruteforce.
+    d) Salir.
     """
     option=raw_input("Introduce tu opcion: ")
     try:
         if option == "a":
             os.system("python2 modules/hashidentifier")
             menu()
+
         elif option == "b":
+            checker.cAmarillo("Elige la opción que deseas usar: ")
+            print """
+                a) Desencriptación de un Hash tipo MD5.
+                b) Desencriptación de un Hash tipo Sha-1.
+                c) Desencriptación de un Hash tipo MySQL.
+                d) Desencriptación de un Hash tipo Django.
+                e) Desencriptación de cualquier tipo de Hash (Debes conocer previamente el tipo de Hash).
+                f) Regresar al menú anterior.
+                """
+            tipodehashh=raw_input("Teclea tu opción: ")
+            if tipodehashh == "a":
+                johnmod.md5hash()
+                menu()
+            elif tipodehashh == "b":
+                johnmod.sha1hash()
+                menu()
+            elif tipodehashh == "c":
+                johnmod.mysqlhash()
+                menu()
+            elif tipodehashh == "d":
+                johnmod.djangohash()
+                menu()
+            elif tipodehashh == "e":
+                johnmod.anyhash()
+                menu()
+            elif tipodehashh == "f":
+                print "Regresando al menú anterior.\n"
+                pass
+            else:
+                print "Opción invalida, intentalo de nuevo."
+                menu()
+        elif option == "c":
             checker.cAmarillo("Utiliza las siguientes direcciones Web para buscar tus hash.")
             print """
             1) Para hash MD5 - https://hashkiller.co.uk/md5-decrypter.aspx
@@ -42,7 +77,7 @@ def menu():
             print ""
             
             menu()
-        elif option == "c":
+        elif option == "d":
             print "Saliendo."
         else:
             menu()
