@@ -25,7 +25,7 @@ from modules import checker
 from modules import hashid
 version='v1.5 Estable'
 
-parser = argparse.ArgumentParser(prog='webhackshl.py',usage='python2 webhackshl.py',description='WebHackSHL es un conjunto de herramientas desarrollado por Security Hack Labs, para realizar auditorias de seguridad web desde basicas hasta avanzadas, diseñado especialmente para sistemas Debian o basados en el, como Kali Linux. WebHackSHL aún esta en estado BETA, cualquier problema reportelo a nuestas cuentas de Email y/o Twitter.')
+parser = argparse.ArgumentParser(prog='webhackshl.py',usage='python2 webhackshl.py',description='WebHackSHL es un conjunto de herramientas desarrollado por Security Hack Labs, para realizar auditorias de seguridad web desde basicas hasta avanzadas, diseñado especialmente para sistemas Debian o basados en el, como Kali Linux. Cualquier problema reportelo en Github o a nuestas cuentas de Email y/o Twitter.')
 parser.add_argument("-u", "--update", help="Actualiza WebHackSHL a la mas version mas reciente.", action="store_true")
 parser.add_argument("-ut", "--utools", help="Actualiza todas las herramientas Necesitadas por WebHackSHL en tu SO.", action="store_true")
 parser.add_argument("-v", "--version", help="Version de WebHackSHL", action="store_true")
