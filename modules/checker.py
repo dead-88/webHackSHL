@@ -15,6 +15,8 @@
 
 import subprocess
 import os
+isgzip=os.path.isfile("/usr/bin/gzip") or os.path.isfile("/bin/gzip")
+isjohn=os.path.isfile("/usr/bin/john") or os.path.isfile("/usr/sbin/john")
 istor=os.path.isfile("/usr/bin/tor")
 isrb=os.path.isfile("/usr/bin/ruby")
 isnm=os.path.isfile("/usr/bin/nmap")
@@ -56,10 +58,11 @@ def updatetools():
         cAmarillo("Actualizando tu lista de paquetes ...")
         os.system("sudo apt update")
         cAmarillo("actualizando Herramientas del sistema...")
-        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor")
+        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip hashcat")
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
+        os.system("sudo apt update")
         cRojo("La actualizacion se realizo correctamente.")
         cRojo("Todo lo necesario esta actualizado, procediendo.")
     elif respuesta == "n":
@@ -77,7 +80,7 @@ def repokali():
         cAmarillo("Actualizando tu lista de paquetes ...")
         os.system("sudo apt update")
         cAmarillo("actualizando Herramientas del sistema...")
-        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor")
+        os.system("sudo apt install --only-upgrade nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip hashcat")
         print ""
         cRojo("La actualizacion se realizo correctamente.")
         cRojo("Todo lo necesario esta actualizado, procediendo.")
@@ -90,7 +93,7 @@ def repokali():
 
 def installall():
     cRojo("""Para que este framework funcione correctamente, necesitas tener instaladas las siguientes herramientas:
-    nmap, fierce, sqlmap, dnsenum, nikto, whatweb & wpscan. Al parecer hay herramientas faltantes en tu sistema!.
+    nmap, fierce, sqlmap, dnsenum, nikto, john, gzip, tor, curl, ruby, whatweb & wpscan. Al parecer hay herramientas faltantes en tu sistema!.
     ¿Deseas instalar todas las herramientas necesarias? Esto solo funciona con sistemas basados en Debian.
     """)
     decision=raw_input("Introduce tu opcion y=continua con la instalación, n=anula la instalación. y/n: ")
@@ -106,7 +109,7 @@ def installall():
         os.system("sudo apt update")
         os.system("clear")
         cAmarillo("Instalando los paquetes ...")
-        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor")
+        os.system("sudo apt install nmap fierce sqlmap dnsenum nikto whatweb wpscan ruby git curl tor gzip hashcat")
         print ""
         cAmarillo("Removiendo el repositorio temporal de Kali Linux ...")
         os.system("sudo rm -rf /etc/apt/sources.list.d/kalitemp.list")
@@ -121,7 +124,7 @@ def installall():
         installall()
 
 def check():
-    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb and isgit and iscurl and istor:
+    if isnm and isfierce and ismap and isenum and isnikto and iswhatw and iswp and isrb and isgit and iscurl and istor and isgzip and isjohn:
         cVerde("Todo lo necesario esta instalado, procediendo.")
     else:
         installall()
