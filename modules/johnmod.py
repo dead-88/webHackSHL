@@ -57,7 +57,8 @@ def descargarwdls():
             os.system("cd wordlists && gzip -d rockyou.txt.gz")
 	    if _ == 0:
                 print "Descompresion exitosa.."
-                hashoffline()
+		print "Regresando al menú anterior, todo esta listo para desencriptar."
+                hashid.menu()
 	    else:
     	        print "Ha ocurrido un error, saliendo.\n"
 	        hashid.menu()
@@ -67,6 +68,7 @@ def descargarwdls():
         else:
             print "Opción invalida, intenta de nuevo."
             descargarwdls()
+		
     except KeyboardInterrupt:
         print "Saliendo."
         pass
