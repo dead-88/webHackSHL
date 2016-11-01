@@ -89,7 +89,7 @@ def hashdecrypt(hashtype):
     gethash()
     print "\nIniciando desencriptación del Hash..."
     print "Intentando desecriptar el hash de tipo ",hashtype,"."
-    subprocess.call(["john","--format="+hashtype,"--wordlist=", wdlist,"hash.txt"])
+    subprocess.call(["john","--format="+hashtype,"--wordlist="+wdlist,"hash.txt"])
     verdecrypt()
 
 def verdecrypt():
