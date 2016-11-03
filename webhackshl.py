@@ -57,7 +57,8 @@ def logo():
  \  /\  /  __/ |_) / __  / (_| | (__|   < _\ \/ __  / /___ 
   \/  \/ \___|_.__/\/ /_/ \__,_|\___|_|\_\\\\__/\/ /_/\____/ 
 
-    Programador: Eduard Eliecer Tolosa Toloza 
+    Programador: Eduard Eliecer Tolosa Toloza
+    Colaboradores: Deiber Mejia Lopez / Angel 
       XMPP/Email: tolosaeduard@cock.lu
 IRC: Server irc.stormbit.net | Canal #SHL | Puerto 6697 (SSL)
     Security Hack Labs Team. @SecurityHackLab
