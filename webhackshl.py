@@ -15,7 +15,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
+import subprocess
 import os
+import socket
 import argparse
 from modules import adminder
 from modules import sqlimod
@@ -29,7 +32,68 @@ parser = argparse.ArgumentParser(prog='webhackshl.py',usage='python2 webhackshl.
 parser.add_argument("-u", "--update", help="Actualiza WebHackSHL a la mas version mas reciente.", action="store_true")
 parser.add_argument("-ut", "--utools", help="Actualiza todas las herramientas Necesitadas por WebHackSHL en tu SO.", action="store_true")
 parser.add_argument("-v", "--version", help="Version de WebHackSHL", action="store_true")
+parser.add_argument("-nc", "--noconnection",help="Iniciar framework sin accesó a intermet.", action="store_true")
 args = parser.parse_args()
+
+
+# create launcher
+def create_launcher():
+    cwd = os.getcwd()
+    filewrite = open("/usr/local/bin/webhackshl", "w")
+    filewrite.write("#!/bin/sh\ncd %s\nchmod +x webhackshl\n./webhackshl $*" % (cwd))
+    filewrite.close()
+    subprocess.Popen("chmod +x /usr/local/bin/webhackshl", shell=True).wait()
+
+# Chequear acceso a internet.
+def check_internet():
+    try:
+        print("[*] Puedes iniciar con ./webhackshl --noconnection para saltar el paso de chequeo.")
+        print("[*] Chequeando si tienes acceso a internet...")
+        rhost = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        rhost.connect(('google.com', 0))
+        rhost.settimeout(2)
+        return 1
+
+    except Exception:
+        return 0
+
+    except KeyboardInterrupt:
+        print("\n")
+        print("[*] Saliendo de WebHackSHL....")
+        exit()
+        sys.exit()
+
+try:
+    # Bypass network check with argument
+    if not "--noconnection" in sys.argv[1:]:
+        # check internet connection
+        if check_internet() == 0:
+            print ("[!] Unable to detect Internet connection. Needed for PTF.")
+            print ("[!] We will now exit PTF. Launch again when you got a connection.")
+            print ("[!] You can also run ptf with the --noconnection argument to bypass the network check.")
+            sys.exit()
+
+        # try to update ourself first
+        print("[*] Actualizando webHackSHL... Antes de iniciar el framework.")
+        subprocess.Popen("git pull", shell=True).wait()
+
+    # create automatic launcher
+    create_launcher()
+
+
+except KeyboardInterrupt:
+    print("\n")
+    print("[*] Saliendo de WebHackSHL...")
+    exit()
+    sys.exit()
+
+except Exception as e:
+    print ("[!] Ah ocurrido un error.")
+    print(("[!] Tienes un error en/con: " + str(e)))
+
+# Aquí procesamos el accesó a el framework sin conexión a internet
+if args.noconnection:
+    print "Iniciando framework sin accesó a internet..."
 
 # Aquí procesamos lo que se tiene que hacer con cada argumento
 if args.update:   
@@ -58,7 +122,7 @@ def logo():
   \/  \/ \___|_.__/\/ /_/ \__,_|\___|_|\_\\\\__/\/ /_/\____/ 
 
     Programador: Eduard Eliecer Tolosa Toloza
-    Colaboradores: Deiber Mejia Lopez / Angel 
+    Colaboradores: Deiber Mejia Lopez / Angel
       XMPP/Email: tolosaeduard@cock.lu
 IRC: Server irc.stormbit.net | Canal #SHL | Puerto 6697 (SSL)
     Security Hack Labs Team. @SecurityHackLab
@@ -94,51 +158,53 @@ try:
         f) Ataques a contraseñas y hashing.
         g) Salir.
         """
-        sel=raw_input("Selecciona: ")
+        sel = raw_input("Selecciona: ")
         if sel == "a":
             try:
                 os.system("python2 modules/sqlitest.py")    
                 webframework()
             except KeyboardInterrupt:
                 webframework()
-        elif sel == "b":
+        elif sel.lower() == "b":
             try:
                 sqlimod.execute()
                 webframework()
             except KeyboardInterrupt:
                 webframework()
-        elif sel == "c":
+        elif sel.lower() == "c":
             try:
                 portsmod.menu()
                 webframework()
             except KeyboardInterrupt:
                 webframework()
-        elif sel == "d":
+        elif sel.lower() == "d":
             try:
                 fingerwebmod.execute()
                 webframework()
             except KeyboardInterrupt:
                 webframework()
-        elif sel == "e":
+        elif sel.lower() == "e":
             try:
                 adminder.adminfind()
                 webframework()
             except KeyboardInterrupt:
                 webframework()
-        elif sel == "f":
+        elif sel.lower() == "f":
             try:
                 hashid.menu()
                 webframework()
             except KeyboardInterrupt:
                 webframework()
-        elif sel == "g":
-            print "Saliendo."
+        elif sel.lower() == "g":
+            print "[*] Saliendo de WeHackSHL..."
                 
         else:
+            checker.cRojo("""[!] Error de selección """)
             webframework()
     webframework()
 
 except KeyboardInterrupt:
-    print "Saliendo."
-    pass
-os._exit(0)
+    print("\n")
+    print("[*] Saliendo de WebHackSHL....")
+    exit()
+    sys.exit()
